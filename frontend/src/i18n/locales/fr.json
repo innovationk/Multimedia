@@ -1,0 +1,18 @@
+{
+    "welcome": "bienvenu·e·x",
+    "loading": "chargement",
+    "default_api_success": "opération enregistrée !",
+    "default_api_error": "erreur, veuillez réessayer plus tard s'il vous plaît.",
+    "home": "accueil",
+    "login": "connexion",
+    "log_in": "se connecter",
+    "logout": "déconnexion",
+    "cancel": "annuler",
+    "create": "creer",
+    "edit": "modifier",
+    "delete": "supprimer",
+    "save": "sauvegarder",
+    "archive": "archiver",
+    "unarchive": "désarchiver",
+    "choose_one": "choisissez-en un(e)"
+}

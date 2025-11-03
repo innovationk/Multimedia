@@ -1,0 +1,18 @@
+{
+    "welcome": "welcome",
+    "loading": "loading",
+    "default_api_success": "data saved!",
+    "default_api_error": "something went wrong, please try again latter.",
+    "home": "home",
+    "login": "login",
+    "log_in": "log in",
+    "logout": "logout",
+    "cancel": "cancel",
+    "create": "create",
+    "edit": "edit",
+    "delete": "delete",
+    "save": "save",
+    "archive": "archive",
+    "unarchive": "unarchive",
+    "choose_one": "choose one"
+}
