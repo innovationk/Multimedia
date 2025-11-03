@@ -57,7 +57,7 @@ export default class ServerAPI {
             let allowedOrigins = [];
             if (process.env.NODE_ENV === "production") {
                 allowedOrigins = [
-                    "https://gaia.preprod.innovationk.fr",
+                    "https://multimedia.solutionk.fr",
                 ];
             }
 

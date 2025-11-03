@@ -1,0 +1,119 @@
+:root {
+    --font1: "Gill Sans", sans-serif;
+    --colour1: #1837F7;
+    --colour2: #142cc5;
+    --colour3: #FFC70B;
+    --colour4: #FFFFFF;
+    --header-height: 80px;
+    --footer-height: 40px;
+}
+
+body {
+    background-color: #fafdf6;
+    color: slategrey;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+* {
+    font-family: var(--font1);
+    color: inherit;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* #region THEME */
+
+a {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    color: inherit;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+select,
+textarea,
+input[type]:not([type=search]):not([type=url]):not([type=hidden]) {
+    background-color: transparent !important;
+    background: transparent !important;
+    border-radius: 8px;
+    border: 1px solid var(--colour1);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+input::placeholder, textarea::placeholder {
+    color: lightgray;
+}
+input:focus, select:focus, textarea:focus {
+    border: 2px solid var(--colour3);
+}
+
+button {
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--colour1);
+    font-weight: bold;
+}
+h1 { font-size: 24px; margin-bottom: 25px; }
+h2 { font-size: 20px; margin-bottom: 20px; }
+h3 { font-size: 18px; margin-bottom: 15px; }
+h4 { font-size: 16px; margin-bottom: 10px; }
+
+/* #endregion THEME */
+
+/* #region MAIN */
+
+#mainStructure {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#mainHeader {
+    height: var(--header-height);
+    line-height: var(--header-height);
+    text-align: center;
+    background-color: var(--colour1);
+    color: var(--colour4);
+}
+#mainHeader .ikCol:hover {
+    font-weight: bold;
+}
+
+#mainBody {
+    /* flex: 1; */
+    position: relative;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    min-height: calc(100vh - var(--header-height) - var(--footer-height) );
+}
+#mainBodySection {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#mainFooter {
+    height: var(--footer-height);
+    line-height: var(--footer-height);
+    text-align: center;
+    background-color: var(--colour1);
+    color: var(--colour4);
+}
+
+/* #endregion MAIN */

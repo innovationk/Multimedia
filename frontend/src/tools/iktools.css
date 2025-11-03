@@ -1,0 +1,48 @@
+.ikW100 { width: 100%; }
+.ikH100 { height: 100%; }
+
+.ikRow {
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+    margin: 0 auto; 
+}
+.ikCol100 { width: 100%; }
+.ikCol50 { width: 50%; }
+.ikCol33 { width: 33.33%; }
+.ikCol66 { width: 66.66%; }
+[class*="ikCol"] {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.ikTextCenter { text-align: center; }
+.ikTextLeft { text-align: left; }
+.ikTextRight { text-align: right; }
+
+
+.ikMarginT8 { margin-top: 4px; }
+.ikMarginLB4 { margin-bottom: 4px; }
+.ikMarginL4 { margin-left: 4px; }
+.ikMarginR4 { margin-right: 4px; }
+.ikMarginV4 { margin-top: 4px; margin-bottom: 4px; }
+.ikMarginH4 { margin-left: 4px; margin-right: 4px; }
+.ikPaddingT4 { padding: 4px; }
+.ikPaddingLB4 { padding-bottom: 4px; }
+.ikPaddingL4 { padding-left: 4px; }
+.ikPaddingR4 { padding-right: 4px; }
+.ikPaddingV4 { padding: 4px; padding-bottom: 4px; }
+.ikPaddingH4 { padding-left: 4px; padding-right: 4px; }
+
+.ikMarginT8 { margin-top: 8px; }
+.ikMarginLB8 { margin-bottom: 8px; }
+.ikMarginL8 { margin-left: 8px; }
+.ikMarginR8 { margin-right: 8px; }
+.ikMarginV8 { margin-top: 8px; margin-bottom: 8px; }
+.ikMarginH8 { margin-left: 8px; margin-right: 8px; }
+.ikPaddingT8 { padding: 8px; }
+.ikPaddingLB8 { padding-bottom: 8px; }
+.ikPaddingL8 { padding-left: 8px; }
+.ikPaddingR8 { padding-right: 8px; }
+.ikPaddingV8 { padding: 8px; padding-bottom: 8px; }
+.ikPaddingH8 { padding-left: 8px; padding-right: 8px; }

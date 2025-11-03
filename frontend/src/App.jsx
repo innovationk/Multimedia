@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import LocalStorageTools from './tools/LocalStorageTools';
 import ScrollToTop from './tools/ScrollToTop';
 import RedirectComponent from './RedirectComponent';
+import MainStructure from './theme/MainStructure';
 import LoginScreen from './screens/account/LoginScreen';
 
 const ProtectedRoute = ({ children }) => {
@@ -30,11 +32,22 @@ const ProtectedRoute = ({ children }) => {
 };
 
 function App() {
+    const { t } = useTranslation();
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setIsLoading(false);
+    }, []);
+
+    if (isLoading) {
+        // TODO: loading screen
+        return <div>{t("loading")}...</div>;
+    }
 
     return (
         <Router>
             <ScrollToTop />
-            
+
             <Routes>
                 <Route path="/" element={
                     <MainStructure>
