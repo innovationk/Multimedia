@@ -105,4 +105,9 @@ export default class MariadbEnums {
         "ASC",
         "DESC"
     ];
+
+    static LANGUAGES = {
+        FR: "fr",
+        EN: "en"
+    }
 }
