@@ -1,5 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+import os from "os";
+import { existsSync, readdirSync, lstatSync } from 'node:fs';
+
 import mariadb from "mariadb";
 import MariadbTools from './mariadb_tools.js';
 import MariadbEnums from "./mariadb_enums.js";
@@ -356,4 +359,62 @@ export default class MariadbConnector {
     }
 
     // #endregion ROWS CRUD
+
+
+    static getFilesPaths({ inputPath, recursive = true, whitelist = ["*"], output = [] }) {
+        if (existsSync(inputPath)) {
+            const files = readdirSync(inputPath);
+
+            for (const file of files) {
+                const filePath = `${inputPath}/${file}`;
+
+                if (lstatSync(filePath).isDirectory()) {
+                    this.getFilesPaths({ inputPath: filePath, recursive: recursive, whitelist: whitelist, output: output });
+
+                } else {
+                    if (whitelist[0] === "*") {
+                        output.push(filePath);
+                    } else {
+
+                        let add = false;
+                        for (const whiteKey of whitelist) {
+                            add |= file.includes(whiteKey);
+                        }
+                        if (add) {
+                            output.push(filePath);
+                        }
+
+                    }
+                }
+            }
+        }
+
+        return output;
+    }
+
+    static async loadTableFiles({ dirPath }) {
+        const tablesFilesPaths = this.getFilesPaths({
+            inputPath: dirPath,
+            recursive: true,
+            whitelist: ["_table.js"],
+            output: []
+        });
+        for (const tableFilePath of tablesFilesPaths) {
+            let cleanPath = tableFilePath;
+            if (os.platform() === 'win32') {
+                cleanPath = `file:///${cleanPath}`;
+            }
+
+            const isLoaded = await this.setTable({ inputPath: cleanPath });
+            if (!isLoaded) {
+                throw new Error(`Load tables: failure`);
+            }
+        }
+        for (const tableKey of this.getTablesKeys()) {
+            const isSync = await this.synchronise({ tableKey: tableKey });
+            if (!isSync) {
+                throw new Error(`Synchronise tables: failure`);
+            }
+        }
+    }
 }

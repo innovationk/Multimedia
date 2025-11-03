@@ -4,6 +4,7 @@
     "description": "Multimedia Backend API",
     "type": "module",
     "scripts": {
+        "test": "NODE_ENV=development mocha unittests/*.test.js --exit",
         "dev": "NODE_ENV=development node ./main.js",
         "start": "NODE_ENV=production node ./main.js"
     },

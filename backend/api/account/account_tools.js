@@ -25,9 +25,9 @@ export default class AccountTools {
             };
 
             const accounts = await MariadbConnector.listRows({ inputs: inputs });
-            if (accounts[0]?.id > 0) {
+            if (accounts.length > 0 && accounts[0][`account.id`] > 0) {
                 const now = (new Date()).valueOf();
-                const isTokenValid = accounts[0].token_deadline - now > 0;
+                const isTokenValid = accounts[0][`account.token_deadline`] - now > 0;
                 if (isTokenValid) {
                     output = accounts[0];
                 }

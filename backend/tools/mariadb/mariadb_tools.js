@@ -136,8 +136,8 @@ export default class MariadbTools {
                 // Default case
                 // selectElements.push(" * ");
 
-                for(const field of Object.keys(table.schema)) {
-                    selectElements.push(` \`${table.label}\`.\`${field}\` AS "${table.label}.${field}" `);
+                for(const field of Object.keys(tables[defaultTableKey].schema)) {
+                    selectElements.push(` \`${tables[defaultTableKey].label}\`.\`${field}\` AS "${tables[defaultTableKey].label}.${field}" `);
                 }
             }
         }

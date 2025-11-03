@@ -22,11 +22,12 @@ export default class AccountController extends Controller {
     // }
 
     static async create(req, res, next) {
-        if (req.body.email && req.body.password
-            // && req.body.pseudo
+        if (req.body.pseudo 
+            && req.body.password
+            // && req.body.email
         ) {
             let validElements = {};
-            validElements.email = await AccountTools.isEmailValid({ string: req.body.email });
+            // validElements.email = await AccountTools.isEmailValid({ string: req.body.email });
             validElements.password = AccountTools.isPasswordValid({ string: req.body.password });
             let sumValid = 0;
             for (const row of Object.values(validElements)) {
@@ -35,20 +36,20 @@ export default class AccountController extends Controller {
 
             if (sumValid === Object.keys(validElements).length) {
 
-                // if (await AccountTools.isPseudoValid({ pseudo: req.body.pseudo })) {
+                if (await AccountTools.isPseudoValid({ pseudo: req.body.pseudo })) {
                     req.body.password = AccountTools.encrypt({ text: req.body.password });
-                // req.body.slug = TextTools.generateSlug(req.body.pseudo);
+                    // req.body.slug = TextTools.generateSlug(req.body.pseudo);
                     await super.create(req, res, next, async ({ row }) => {
                         // TODO send email welcome
                     });
 
-                // } else {
-                //     super.sendError({ req: req, res: res, message: `Pseudo's length must be equal or greater than 3 and must not be already taken.` });
-                // }
+                } else {
+                    super.sendError({ req: req, res: res, message: `Pseudo's length must be equal or greater than 3 and must not be already taken.` });
+                }
 
             } else {
                 let message = "";
-                if (!validElements.email) { message += `${message.length > 0 ? " " : ""}The email address is not valid (RFC 2822).`; }
+                // if (!validElements.email) { message += `${message.length > 0 ? " " : ""}The email address is not valid (RFC 2822).`; }
                 if (!validElements.password) {
                     message += `${message.length > 0 ? " " : ""} The password is not valid.`;
                     message += ` Its length must be equal or greater than 8.`;
@@ -61,7 +62,7 @@ export default class AccountController extends Controller {
                 super.sendError({ req: req, res: res, message: message });
             }
         } else {
-            super.sendError({ req: req, res: res, message: "Wrong parameters in body: email, password, pseudo" });
+            super.sendError({ req: req, res: res, message: "Wrong parameters" });
         }
     }
 
@@ -81,37 +82,33 @@ export default class AccountController extends Controller {
                 const tokenDeadline = (new Date()).valueOf() + TOKEN_DEADLINE;
                 await MariadbConnector.updateRow({
                     table: AccountTable, 
-                    primaryValue: accounts[0].id, 
+                    primaryValue: accounts[0][`account.id`],
                     inputs: {
                         token: token,
                         token_deadline: tokenDeadline,
                     }
                 });
 
-                console.log(accounts[0]);
-
                 res.status(200).json({
-                    token_id: accounts[0].id,
+                    token_id: accounts[0][`account.id`],
                     token: token,
                     token_deadline: tokenDeadline,
-                    hash: CryptoTools.sha512({ text: `${accounts[0].id}_${token}_${tokenDeadline}` }),
-                    // pseudo: accounts[0].pseudo,
-                    // slug: accounts[0].slug,
-                    admin: accounts[0].admin
+                    hash: CryptoTools.sha512({ text: `${accounts[0][`account.id`]}_${token}_${tokenDeadline}` }),
+                    admin: accounts[0][`account.admin`]
                 });
 
             } else {
-                this.sendError({ req: req, res: res, statusCode: 401, message: `Wrong parameters in the body: email or password.` });
+                this.sendError({ req: req, res: res, statusCode: 401, message: `Wrong parameters` });
             }
         } else {
-            super.sendError({ req: req, res: res, message: "Missing parameters in body: email, password" });
+            super.sendError({ req: req, res: res, message: "Missing parameters" });
         }
     }
 
     static async logout(req, res, next) {
         await MariadbConnector.updateRow({
             table: AccountTable, 
-            primaryValue: req.body.token, 
+            primaryValue: req.body.token_id, 
             inputs: {
                 token: "",
                 token_deadline: 0,
