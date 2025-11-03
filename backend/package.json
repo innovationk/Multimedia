@@ -1,0 +1,19 @@
+{
+    "name": "multimedia-backend",
+    "version": "1.0.0",
+    "description": "Multimedia Backend API",
+    "type": "module",
+    "scripts": {
+        "dev": "NODE_ENV=development node ./main.js",
+        "start": "NODE_ENV=production node ./main.js"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^16.5.0",
+        "express": "^5.1.0",
+        "mariadb": "^3.4.1"
+    },
+    "devDependencies": {
+        "mocha": "^11.7.1"
+    }
+}

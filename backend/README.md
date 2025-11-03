@@ -1,6 +1,6 @@
 # Backend
 
-## Launch
+## Prerequisites
 
 For windows and NODE_ENV :
     npm install -g win-node-env
@@ -9,6 +9,13 @@ In console :
     nvm use 20
     npm install
     npm run dev
+
+## Launch
+
+```
+npm install
+npm run dev
+```
 
 ## Deploy
 
