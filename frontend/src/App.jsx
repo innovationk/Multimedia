@@ -8,6 +8,8 @@ import MainStructure from './theme/MainStructure';
 import LoginScreen from './screens/account/LoginScreen';
 import LogoutScreen from './screens/account/LogoutScreen';
 import HomeScreen from './screens/home/HomeScreen';
+import MoviesScreen from './screens/movie/moviesScreen';
+import MovieScreen from './screens/movie/MovieScreen';
 
 const ProtectedRoute = ({ children }) => {
     const [authState, setAuthState] = useState(0);
@@ -72,6 +74,21 @@ function App() {
                     <MainStructure>
                         <ProtectedRoute>
                             <HomeScreen />
+                        </ProtectedRoute>
+                    </MainStructure>
+                } />
+
+                <Route path={`/movies`} element={
+                    <MainStructure>
+                        <ProtectedRoute>
+                            <MoviesScreen />
+                        </ProtectedRoute>
+                    </MainStructure>
+                } />
+                <Route path={`/movies/:movieId`} element={
+                    <MainStructure>
+                        <ProtectedRoute>
+                            <MovieScreen />
                         </ProtectedRoute>
                     </MainStructure>
                 } />

@@ -10,7 +10,7 @@
 }
 
 body {
-    background-color: #fafdf6;
+    background-color: #f6fbfd;
     color: slategrey;
     height: 100%;
     margin: 0;
@@ -33,6 +33,9 @@ a {
     color: inherit;
     font-family: inherit;
     cursor: pointer;
+}
+a:hover {
+    text-decoration: underline;
 }
 
 select,

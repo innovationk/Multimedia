@@ -31,7 +31,11 @@ function MainHeader() {
         if (await LocalStorageTools.isAccountValid()) {
             setIsLoggedIn(true);
 
-            let _links = [];
+            let _links = [
+                { label: "home", url: "/home" },
+                { label: "movies", url: "/movies" },
+                { label: "logout", url: "/logout" }
+            ];
 
             // const ACCOUNT = LocalStorageTools.readData({ key: "account" });
             // if(ACCOUNT.admin === 1) { _links.push({ label: "admin", url: "/admin" }); }
@@ -49,25 +53,36 @@ function MainHeader() {
         <div className="ikW100">
             {isLoggedIn ?
                 <div className="ikRow">
-                    <div className="ikCol ikCol50 ikTextCenter">
+                    {links.map((link, index) => (
+                        <div key={`col_${index}`}
+                            className="ikCol ikTextCenter"
+                            style={{ width: `${ 100 / Math.max(1, links.length) }%` }}
+                        >
+                            <NavLink to={link.url}>
+                                {firtsLetterUppercase(t(link.label))}
+                            </NavLink>
+                        </div>
+                    ))}
+
+                    {/* <div className="ikCol ikCol50 ikTextCenter">
                         <NavLink to={"/home"}>
                             {firtsLetterUppercase(t(`home`))}
-                            {/* <img src={Logo} width={50} height={50} /> */}
+                            <img src={Logo} width={50} height={50} />
                         </NavLink>
                     </div>
-                    {/* {links.map((link, index) => (
+                    {links.map((link, index) => (
                         <div className="ikCol ikTextCenter" key={`col_${index}`}>
                             <NavLink to={link.url}>
                                 {firtsLetterUppercase(t(link.label))}
                             </NavLink>
                         </div>
-                    ))} */}
+                    ))}
                     <div className="ikCol ikCol50 ikTextCenter">
                         <NavLink to={"/logout"}>
                             {firtsLetterUppercase(t(`logout`))}
-                            {/* <LogoutIcon width={30} height={30} fill={`white`}/> */}
+                            <LogoutIcon width={30} height={30} fill={`white`}/>
                         </NavLink>
-                    </div>
+                    </div> */}
                 </div>
                 :
                 <div className="ikTextCenter ikPaddingV20">
