@@ -55,11 +55,11 @@ export default class ServerAPI {
             server.use(bodyParser.json());
 
             let allowedOrigins = [];
-            if (process.env.NODE_ENV === "production") {
-                allowedOrigins = [
-                    "https://multimedia.innovation.fr",
-                ];
-            }
+            // if (process.env.NODE_ENV === "production") {
+            //     allowedOrigins = [
+            //         "https://multimedia.innovationk.fr",
+            //     ];
+            // }
 
             if (allowedOrigins.length > 0) {
                 const corsOptions = {

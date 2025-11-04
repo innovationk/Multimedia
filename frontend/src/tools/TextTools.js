@@ -86,3 +86,11 @@ export const getLabelI18n = (input, prefix, prioLang) => {
 
     return output;
 };
+
+export const generateSlug = (input) => {
+    let cleaned = input.replace(/[^a-zA-Z0-9\s]/g, '');
+    cleaned = cleaned.toLowerCase();
+    cleaned = cleaned.replace(/\s+/g, '-');
+    cleaned = cleaned.trim();
+    return cleaned;
+};

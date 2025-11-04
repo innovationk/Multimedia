@@ -36,3 +36,7 @@ ffmpeg -i myMovie.mkv -map 0:v -map 0:a:0 -c:v copy -c:a aac myMovie.mp4
 -c:v copy: Copies the video stream without re-encoding.
 -c:a aac: Encodes audio to AAC (required for MP4 compatibility).
 ```
+
+
+
+curl -v -H "Range: bytes=0-1000000" https://backend.multimedia.innovationk.fr/api/movies/1/stream

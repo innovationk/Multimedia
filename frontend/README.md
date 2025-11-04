@@ -66,9 +66,9 @@ node -v
 
 npm install
 npm run build:prod
-cp -vaR ~/src/multimedia/dist/* ~/multimedia.innovation.fr
+cp -vaR ~/src/multimedia/dist/* ~/multimedia.innovationk.fr
 ```
 
 #### .httacess
 
-The .httacess is not compiled and sent in the destination so add/copy the .httacess in ~/multimedia.innovation.fr  directly.
+The .httacess is not compiled and sent in the destination so add/copy the .httacess in ~/multimedia.innovationk.fr  directly.

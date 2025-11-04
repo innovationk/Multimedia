@@ -51,16 +51,16 @@ pm2 delete multimedia_backend
 ### O2Switch
 
 CPanel : 
-- Sous-domaine > Créer un sous-domaine > multimedia.backend.innovation.fr
-- Let's Encrypt™ SSL : multimedia.backend.innovation.fr
-- Node.js > multimedia.backend.innovation.fr
+- Sous-domaine > Créer un sous-domaine > backend.multimedia.innovationk.fr
+- Let's Encrypt™ SSL : backend.multimedia.innovationk.fr
+- Node.js > backend.multimedia.innovationk.fr
     - Choose Node.js version
     - Choose Application mode
-    - Application root: multimedia.backend.innovation.fr, send code files here
-    - Application URL: multimedia.backend.innovation.fr
+    - Application root: backend.multimedia.innovationk.fr, send code files here
+    - Application URL: backend.multimedia.innovationk.fr
     - Application startup file: start_o2switch.cjs
     - Create application
     - Run npm install
     - Start app
 
-CPanel : Node.js > multimedia.backend.innovation.fr
+CPanel : Node.js > backend.multimedia.innovationk.fr

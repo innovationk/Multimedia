@@ -1,0 +1,2 @@
+(() => import('./main.js'))(); 
+// Workaround CloudLinux + NodeJS + Passenger  -> ERR_REQUIRE_ESM (rf: https://cloudlinux.zendesk.com/hc/en-us/articles/6719280681884--ERR-REQUIRE-ESM-Must-use-import-to-load-ES-Modules)

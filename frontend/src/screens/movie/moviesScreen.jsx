@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { firtsLetterUppercase } from "../../tools/TextTools";
+import { firtsLetterUppercase, generateSlug } from "../../tools/TextTools";
 import { useFeedbackMessage } from "../../theme/FeedbackMessageContext";
 import APITools from "../../tools/APITools";
 import EventBus from '../../tools/EventBus';
 import AppEvents from '../../theme/AppEvents';
 import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
+import DownloadButton from "./DownloadButton";
 
 
 function MoviesScreen() {
@@ -48,8 +49,15 @@ function MoviesScreen() {
 
         <div className="ikMarginT20">
             {rows.map((row, index) => (
-                <div key={`row_${index}`}>
-                    <NavLink to={`/movies/${row[`movie.id`]}`}>{row[`movie.title`]} ({row[`movie.language`]})</NavLink>
+                <div key={`row_${index}`} className="ikRow">
+                    <div className="ikCol">
+                        <NavLink to={`/movies/${row[`movie.id`]}`}>{row[`movie.title`]} ({row[`movie.language`]})</NavLink>
+                    </div>
+                    <div className="ikCol">
+                        <DownloadButton downloadUrl={`${APITools.getURL({})}/api/movies/${row[`movie.id`]}/download`}
+                            title={generateSlug(row[`movie.title`])}
+                        />
+                    </div>
                 </div>
             ))}
         </div>
