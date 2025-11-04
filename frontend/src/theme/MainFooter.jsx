@@ -11,7 +11,7 @@ function MainFooter() {
     return (
         <div className="ikW100">
             <div className="ikTextCenter">
-                © Solution K {new Date().getFullYear()}
+                © Innovation K {new Date().getFullYear()}
             </div>
         </div>
     );

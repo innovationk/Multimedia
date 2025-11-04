@@ -58,7 +58,7 @@ pm2 delete multimedia_frontend
 
 Configure .env.prod
 
-Via SSH: ssh -i ~/.ssh/solutionk_github_rsa SYSUSER@IP_ADDRESS_OF_SERVER
+Via SSH: ssh -i ~/.ssh/innovation_github_rsa SYSUSER@IP_ADDRESS_OF_SERVER
 ```
 cd ~/src/multimedia
 export PATH="$PATH:/opt/alt/alt-nodejs20/root/usr/bin/"
@@ -66,9 +66,9 @@ node -v
 
 npm install
 npm run build:prod
-cp -vaR ~/src/multimedia/dist/* ~/multimedia.solutionk.fr
+cp -vaR ~/src/multimedia/dist/* ~/multimedia.innovation.fr
 ```
 
 #### .httacess
 
-The .httacess is not compiled and sent in the destination so add/copy the .httacess in ~/multimedia.solutionk.fr  directly.
+The .httacess is not compiled and sent in the destination so add/copy the .httacess in ~/multimedia.innovation.fr  directly.
