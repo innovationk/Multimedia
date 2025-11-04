@@ -11,7 +11,8 @@ import CssTools from "../../tools/CssTools";
 
 
 function DownloadButton({
-    downloadUrl=""
+    downloadUrl="",
+    title=""
 }) {
     const { t, i18n } = useTranslation();
     const { showMessage } = useFeedbackMessage();
@@ -49,7 +50,7 @@ function DownloadButton({
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'large-movie.mp4';
+            a.download = `${title}.mp4`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
