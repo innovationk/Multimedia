@@ -22,4 +22,17 @@ winget install ffmpeg
 
 ```
 ffmpeg -i myMovie.mkv
+
+Stream #0:0: Video: h264, ...
+Stream #0:1: Audio: aac, ...
+Stream #0:2: Subtitle: srt, ...
+
+
+
+ffmpeg -i myMovie.mkv -map 0:v -map 0:a:0 -c:v copy -c:a aac myMovie.mp4
+
+-map 0:v: Selects all video streams.
+-map 0:a:1: Selects the second audio track (replace 1 with your desired track number).
+-c:v copy: Copies the video stream without re-encoding.
+-c:a aac: Encodes audio to AAC (required for MP4 compatibility).
 ```
