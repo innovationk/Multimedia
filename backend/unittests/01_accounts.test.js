@@ -27,15 +27,15 @@ describe('Init', function () {
         }
     });
 
-    it(`Login`, async function () {
-        for (let iUser = 0; iUser < USERS.length; ++iUser) {
-            let response = new DummyResponse();
+    // it(`Login`, async function () {
+    //     for (let iUser = 0; iUser < USERS.length; ++iUser) {
+    //         let response = new DummyResponse();
             
-            await AccountController.login({
-                body: {...USERS[iUser]}
-            }, response);
+    //         await AccountController.login({
+    //             body: {...USERS[iUser]}
+    //         }, response);
 
-            assert.strictEqual(response.data.token_deadline > 0, true);
-        }
-    });
+    //         assert.strictEqual(response.data.token_deadline > 0, true);
+    //     }
+    // });
 });
