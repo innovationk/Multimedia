@@ -7,8 +7,9 @@ import APITools from "../../tools/APITools";
 import EventBus from '../../tools/EventBus';
 import AppEvents from '../../theme/AppEvents';
 import LocalStorageTools from "../../tools/LocalStorageTools";
-import Mandatory from '../../components/Mandatory'
 import CssTools from "../../tools/CssTools";
+import Mandatory from '../../components/Mandatory'
+import InputPassword from "./InputPassword";
 
 
 function LoginScreen() {
@@ -17,11 +18,35 @@ function LoginScreen() {
     const { showMessage } = useFeedbackMessage();
 
     const [pseudo, set_pseudo] = useState("");
-    
+    const passwordRef = useRef(null);
 
     useEffect(() => {
         LocalStorageTools.removeData({ key: 'account' });
     }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // const response = await APITools.send({
+        //     method: APITools.Methods.PUT,
+        //     path: "/api/login",
+        //     body: {
+        //         email: email,
+        //         password: passwordRef.current.getValue(),
+        //     }
+        // });
+        // if (response.hasOwnProperty("token")) {
+        //     LocalStorageTools.upsertData({ key: 'account', jsonData: response });
+
+        //     EventBus.dispatch(AppEvents.Login, { message: null });
+
+        //     navigate(`/home`);
+        // }
+        // else {
+            showMessage(firtsLetterUppercase(t('wrong_inputs')));
+        // }
+    }
+
 
     return(
     <div className="ikRelativeChildCenterVH" style={{ width: "50%", maxWidth: CssTools.getCSSVariable("--body-maxwidth") }}>
@@ -29,7 +54,7 @@ function LoginScreen() {
             {firtsLetterUppercase(t('log_in'))}
         </h1>
         
-        <form>
+        <form onSubmit={handleSubmit}>
 
             <div className='ikRow'>
                 <div className='ikCol100 ikTextLeft'>
@@ -47,6 +72,23 @@ function LoginScreen() {
                         />
                     </div>
                 </div>
+            </div>
+            <div className='ikRow ikMarginT16'>
+                <div className='ikCol100 ikTextLeft'>
+                    <label>
+                        {firtsLetterUppercase(t('password'))}
+                        <Mandatory />
+                    </label>
+                    <div className='ikMarginT8'>
+                        <InputPassword ref={passwordRef} showRules={false} />
+                    </div>
+                </div>
+            </div>
+
+            <div className='ikMarginT32 ikTextCenter'>
+                <button type='submit' className='button1'>
+                    {firtsLetterUppercase(t('login'))}
+                </button>
             </div>
 
         </form>

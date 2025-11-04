@@ -3,6 +3,7 @@
     "loading": "chargement",
     "default_api_success": "opération enregistrée !",
     "default_api_error": "erreur, veuillez réessayer plus tard s'il vous plaît.",
+    "wrong_inputs": "Renseignements manquants et/ou erronés",
     "home": "accueil",
     "login": "connexion",
     "log_in": "se connecter",
@@ -14,5 +15,8 @@
     "save": "sauvegarder",
     "archive": "archiver",
     "unarchive": "désarchiver",
-    "choose_one": "choisissez-en un(e)"
+    "choose_one": "choisissez-en un(e)",
+    "pseudo": "pseudo",
+    "email": "email",
+    "password": "mot de passe"
 }

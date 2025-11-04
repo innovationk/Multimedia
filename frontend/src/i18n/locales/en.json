@@ -3,6 +3,7 @@
     "loading": "loading",
     "default_api_success": "data saved!",
     "default_api_error": "something went wrong, please try again latter.",
+    "wrong_inputs": "Missing and/or incorrect inputs.",
     "home": "home",
     "login": "login",
     "log_in": "log in",
@@ -14,5 +15,8 @@
     "save": "save",
     "archive": "archive",
     "unarchive": "unarchive",
-    "choose_one": "choose one"
+    "choose_one": "choose one",
+    "pseudo": "pseudo",
+    "email": "email",
+    "password": "password"
 }
