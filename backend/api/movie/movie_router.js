@@ -15,4 +15,10 @@ router
 //     .put((req, res, next) => MovieController.update(req, res, next))
 ;
 
+router
+    .route("/movies/:primaryValue/stream")
+    .get((req, res, next) => MovieController.stream(req, res, next))
+//     .put((req, res, next) => MovieController.update(req, res, next))
+;
+
 export default router;

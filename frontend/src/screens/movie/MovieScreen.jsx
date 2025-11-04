@@ -18,6 +18,7 @@ function MovieScreen() {
     const { movieId } = useParams();
 
     const [row, setRow] = useState({});
+    const videoRef = useRef(null);
 
     useEffect(() => {
         fetchRows();
@@ -37,12 +38,26 @@ function MovieScreen() {
         setRow(_row);
     };
 
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.src = `${APITools.getURL({})}/api/movies/${movieId}/stream`;
+            videoRef.current.load();
+        }
+    }, [videoRef]);
+
 
     return(
     <>
         <h1 className="ikTextCenter">
             {row[`movie.title`]} ({row[`movie.language`]})
         </h1>
+
+        <video
+            ref={videoRef}
+            controls
+            width={"100%"}
+            height={"300px"}
+        />
     </>
     );
 }
