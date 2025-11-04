@@ -8,6 +8,7 @@ import EventBus from '../../tools/EventBus';
 import AppEvents from '../../theme/AppEvents';
 import LocalStorageTools from "../../tools/LocalStorageTools";
 import Mandatory from '../../components/Mandatory'
+import CssTools from "../../tools/CssTools";
 
 
 function LoginScreen() {
@@ -23,7 +24,7 @@ function LoginScreen() {
     }, []);
 
     return(
-    <div className="ikRelativeChildCenterVH" style={{ width: "50%", maxWidth: "1200px" }}>
+    <div className="ikRelativeChildCenterVH" style={{ width: "50%", maxWidth: CssTools.getCSSVariable("--body-maxwidth") }}>
         <h1 className="ikTextCenter">
             {firtsLetterUppercase(t('log_in'))}
         </h1>
