@@ -27,24 +27,24 @@ function LoginScreen() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // const response = await APITools.send({
-        //     method: APITools.Methods.PUT,
-        //     path: "/api/login",
-        //     body: {
-        //         email: email,
-        //         password: passwordRef.current.getValue(),
-        //     }
-        // });
-        // if (response.hasOwnProperty("token")) {
-        //     LocalStorageTools.upsertData({ key: 'account', jsonData: response });
+        const response = await APITools.send({
+            method: APITools.Methods.PUT,
+            path: "/api/login",
+            body: {
+                pseudo: pseudo,
+                password: passwordRef.current.getValue(),
+            }
+        });
+        if (response.hasOwnProperty("token")) {
+            
+            LocalStorageTools.upsertData({ key: 'account', jsonData: response });
+            EventBus.dispatch(AppEvents.Login, { message: null });
 
-        //     EventBus.dispatch(AppEvents.Login, { message: null });
+            navigate(`/home`);
 
-        //     navigate(`/home`);
-        // }
-        // else {
+        } else {
             showMessage(firtsLetterUppercase(t('wrong_inputs')));
-        // }
+        }
     }
 
 

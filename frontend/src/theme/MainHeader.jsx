@@ -33,10 +33,10 @@ function MainHeader() {
 
             let _links = [];
 
-            const ACCOUNT = LocalStorageTools.readData({ key: "account" });
-            if(ACCOUNT.admin === 1) { _links.push({ label: "admin", url: "/admin" }); }
+            // const ACCOUNT = LocalStorageTools.readData({ key: "account" });
+            // if(ACCOUNT.admin === 1) { _links.push({ label: "admin", url: "/admin" }); }
 
-            _links.push({ label: "settings", url: "/settings" })
+            // _links.push({ label: "settings", url: "/settings" })
 
             setLinks(_links)
         } else {
@@ -49,20 +49,22 @@ function MainHeader() {
         <div className="ikW100">
             {isLoggedIn ?
                 <div className="ikRow">
-                    <div className="ikCol ikTextCenter">
+                    <div className="ikCol ikCol50 ikTextCenter">
                         <NavLink to={"/home"}>
+                            {firtsLetterUppercase(t(`home`))}
                             {/* <img src={Logo} width={50} height={50} /> */}
                         </NavLink>
                     </div>
-                    {links.map((link, index) => (
+                    {/* {links.map((link, index) => (
                         <div className="ikCol ikTextCenter" key={`col_${index}`}>
                             <NavLink to={link.url}>
                                 {firtsLetterUppercase(t(link.label))}
                             </NavLink>
                         </div>
-                    ))}
-                    <div className="ikCol ikTextCenter">
+                    ))} */}
+                    <div className="ikCol ikCol50 ikTextCenter">
                         <NavLink to={"/logout"}>
+                            {firtsLetterUppercase(t(`logout`))}
                             {/* <LogoutIcon width={30} height={30} fill={`white`}/> */}
                         </NavLink>
                     </div>

@@ -11,6 +11,7 @@
 .ikCol50 { width: 50%; }
 .ikCol33 { width: 33.33%; }
 .ikCol66 { width: 66.66%; }
+.ikCol25 { width: 25%; }
 [class*="ikCol"] {
     display: table-cell;
     vertical-align: middle;

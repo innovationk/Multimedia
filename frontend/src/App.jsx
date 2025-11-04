@@ -6,6 +6,8 @@ import ScrollToTop from './tools/ScrollToTop';
 import RedirectComponent from './RedirectComponent';
 import MainStructure from './theme/MainStructure';
 import LoginScreen from './screens/account/LoginScreen';
+import LogoutScreen from './screens/account/LogoutScreen';
+import HomeScreen from './screens/home/HomeScreen';
 
 const ProtectedRoute = ({ children }) => {
     const [authState, setAuthState] = useState(0);
@@ -58,6 +60,19 @@ function App() {
                 <Route path={`/login`} element={
                     <MainStructure>
                         <LoginScreen />
+                    </MainStructure>
+                } />
+                <Route path={`/logout`} element={
+                    <MainStructure>
+                        <LogoutScreen />
+                    </MainStructure>
+                } />
+
+                <Route path={`/home`} element={
+                    <MainStructure>
+                        <ProtectedRoute>
+                            <HomeScreen />
+                        </ProtectedRoute>
                     </MainStructure>
                 } />
 

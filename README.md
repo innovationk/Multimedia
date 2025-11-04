@@ -2,21 +2,24 @@
 
 Multimedia library
 
-## Movies
 
-### Format
+## Format
 
-#### Mac
+### Mac
 
 ```
 brew install ffmpeg
-
-ffmpeg -i myMovie.mkv
-
 ```
 
-#### PC
+### PC
 
 ```
 winget install ffmpeg
+# Add ffmpeg path to Windows env. var
+```
+
+### Movies
+
+```
+ffmpeg -i myMovie.mkv
 ```
