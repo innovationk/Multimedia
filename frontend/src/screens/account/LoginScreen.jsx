@@ -23,7 +23,7 @@ function LoginScreen() {
     }, []);
 
     return(
-    <div className="">
+    <div className="ikRelativeChildCenterVH" style={{ width: "50%", maxWidth: "1200px" }}>
         <h1 className="ikTextCenter">
             {firtsLetterUppercase(t('log_in'))}
         </h1>
