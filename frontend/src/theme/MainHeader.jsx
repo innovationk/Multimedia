@@ -6,7 +6,7 @@ import EventBus from '../tools/EventBus';
 import AppEvents from './AppEvents';
 import LocalStorageTools from "../tools/LocalStorageTools";
 import CssTools from "../tools/CssTools";
-// import Logo from "../assets/images/logo.png";
+import Logo from "../assets/images/logo_white.png";
 // import LogoutIcon from "../assets/images/LogoutIcon";
 
 
@@ -85,8 +85,8 @@ function MainHeader() {
                     </div> */}
                 </div>
                 :
-                <div className="ikTextCenter ikPaddingV20">
-                    {/* <img src={Logo} width={150} height={150} /> */}
+                <div className="ikTextCenter ikPaddingT15">
+                    <img src={Logo} width={40} height={40} />
                 </div>
             }
         </div>

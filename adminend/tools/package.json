@@ -1,0 +1,11 @@
+{
+    "name": "multimedia-admin",
+    "version": "1.0.0",
+    "description": "Multimedia admin tools",
+    "type": "module",
+    "scripts": {
+    },
+    "dependencies": {
+        "mariadb": "^3.4.1"
+    }
+}
