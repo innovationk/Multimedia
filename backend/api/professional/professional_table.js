@@ -9,7 +9,7 @@ export default class ProfessionalTable extends MariadbTable {
         state: { dataType: MariadbEnums.DataTypes.ENUM, nullable: false, values: Object.values(MariadbEnums.States), default: `"${MariadbEnums.States.ACTIVE}"`, index: true },
 
         name: { dataType: MariadbEnums.DataTypes.VARCHAR, length: 512, nullable: false },
-        surname: { dataType: MariadbEnums.DataTypes.VARCHAR, length: 512, nullable: false },
+        surname: { dataType: MariadbEnums.DataTypes.VARCHAR, length: 512, default: `""` },
 
         music: { dataType: MariadbEnums.DataTypes.BOOLEAN, default: 0, },
         movie: { dataType: MariadbEnums.DataTypes.BOOLEAN, default: 0, },

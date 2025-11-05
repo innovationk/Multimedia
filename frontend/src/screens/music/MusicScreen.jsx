@@ -8,6 +8,7 @@ import EventBus from '../../tools/EventBus';
 import AppEvents from '../../theme/AppEvents';
 import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
+import MusicPros from "./MusicPros";
 
 
 function MusicScreen() {
@@ -25,21 +26,20 @@ function MusicScreen() {
             {firtsLetterUppercase(t('music'))}
         </h1>
 
-        <div className="ikMarginT20">
-            <div className="ikMarginT40">
-                <h2>0-9</h2>
-            </div>
-            
-            {[...Array(26)].map((_, iLetter) => {
-                const letter = (iLetter+10).toString(36);
+        {/* TODO
+        <div className="ikMarginT60">
+            <div className="h1">0-9</div>
+        </div> */}
+        
+        {[...Array(26)].map((_, iLetter) => {
+            const letter = (iLetter+10).toString(36);
 
-                return (
-                    <div key={`row_${iLetter}`} className="ikMarginT40">
-                        <h2>{letter.toUpperCase()}</h2>
-                    </div>
-                )
-            })}
-        </div>
+            return ( 
+                <MusicPros key={`row_${iLetter}`}
+                    firstChar={letter} 
+                /> 
+            )
+        })}
     </>
     );
 }

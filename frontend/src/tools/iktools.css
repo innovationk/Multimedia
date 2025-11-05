@@ -175,3 +175,29 @@
 .ikPaddingR40 { padding-right: 40px; }
 .ikPaddingV40 { padding: 40px; padding-bottom: 40px; }
 .ikPaddingH40 { padding-left: 40px; padding-right: 40px; }
+
+.ikMarginT50 { margin-top: 50px; }
+.ikMarginLB50 { margin-bottom: 50px; }
+.ikMarginL50 { margin-left: 50px; }
+.ikMarginR50 { margin-right: 50px; }
+.ikMarginV50 { margin-top: 50px; margin-bottom: 50px; }
+.ikMarginH50 { margin-left: 50px; margin-right: 50px; }
+.ikPaddingT50 { padding: 50px; }
+.ikPaddingLB50 { padding-bottom: 50px; }
+.ikPaddingL50 { padding-left: 50px; }
+.ikPaddingR50 { padding-right: 50px; }
+.ikPaddingV50 { padding: 50px; padding-bottom: 50px; }
+.ikPaddingH50 { padding-left: 50px; padding-right: 50px; }
+
+.ikMarginT60 { margin-top: 60px; }
+.ikMarginLB60 { margin-bottom: 60px; }
+.ikMarginL60 { margin-left: 60px; }
+.ikMarginR60 { margin-right: 60px; }
+.ikMarginV60 { margin-top: 60px; margin-bottom: 60px; }
+.ikMarginH60 { margin-left: 60px; margin-right: 60px; }
+.ikPaddingT60 { padding: 60px; }
+.ikPaddingLB60 { padding-bottom: 60px; }
+.ikPaddingL60 { padding-left: 60px; }
+.ikPaddingR60 { padding-right: 60px; }
+.ikPaddingV60 { padding: 60px; padding-bottom: 60px; }
+.ikPaddingH60 { padding-left: 60px; padding-right: 60px; }
