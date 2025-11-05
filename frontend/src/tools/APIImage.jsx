@@ -1,26 +1,63 @@
-// import { useEffect, useRef, useState } from 'react';
-// import APITools from './APITools';
-// import PlaceholderImg from '../../../assets/images/placeholder.png';
+import { useEffect, useState, useRef } from "react";
+import APITools from "./APITools";
 
-// export default function APIImage({}) {
-//     const [image, setImage] = useState(PlaceholderImg);
+function APIImage({
+    path = '',
+    query = {},
+    alt="alt",
+    cssClasses = "",
+    cssStyle = {},
+    timestamp = "" // refresh purpose
+}) {
+    const componentRef = useRef(null);
+    const [imageData, setImageData] = useState("");
 
-//     useEffect(() => {
-//         fetchImage();
-//     });
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    fetchImage();
+                    observer.disconnect();
+                }
+            },
+            {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1,
+            }
+        );
 
-//     const fetchImage = async () => {
-//         const fetched = await APITools.fetchImage({
-//             uriPath: `/api/videos/mux/${muxPlaybackId}/thumbnail`,
-//         });
+        if (componentRef.current) {
+            observer.observe(componentRef.current);
+        }
 
-//     };
+        return () => {
+            if (componentRef.current) {
+                observer.unobserve(componentRef.current);
+            }
+        };
+    }, [path, timestamp]);
 
-//     return (
-//         <img
-//             src={image}
-//             alt="Video thumbnail"
-//             className={``}
-//         />
-//     )
-// }
+    const fetchImage = async () => {
+        if (path.length > 0) {
+            const response = await APITools.fetchImage({ path: path, query: query });
+            setImageData(response.image);
+        }
+    };
+
+
+    return (
+        <div ref={componentRef}>
+            {imageData === "" ?
+                <></>
+                :
+                <img src={imageData} 
+                    className={cssClasses} 
+                    style={cssStyle} 
+                    alt=""
+                />
+            }
+        </div>
+    );
+}
+export default APIImage;

@@ -15,4 +15,9 @@ router
 //     .put((req, res, next) => ProfessionalController.update(req, res, next))
 ;
 
+router
+    .route("/professionals/:primaryValue/image")
+    .get((req, res, next) => ProfessionalController.getImage(req, res, next))
+;
+
 export default router;

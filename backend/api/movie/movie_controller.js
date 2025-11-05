@@ -1,4 +1,3 @@
-import Logger from '../../tools/logger.js';
 import Controller from '../controller.js';
 import MovieTable from "./movie_table.js";
 import fs from 'node:fs';

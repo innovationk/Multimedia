@@ -8,6 +8,7 @@ import EventBus from '../../tools/EventBus';
 import AppEvents from '../../theme/AppEvents';
 import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
+import APIImage from "../../tools/APIImage";
 
 
 function MusicPros({
@@ -52,20 +53,31 @@ function MusicPros({
                 <div className="h1">{firstChar.toUpperCase()}</div>
 
                 {[...Array(rows.length)].map((_, iRow) => (
-                    <div className="ikRow" key={`grid_row_${iRow}`}>
+                    <div className="ikRow " key={`grid_row_${iRow}`}>
 
                         {[...Array(4)].map((_, iCol) => {
                             const iComponent = iRow * 4 + iCol;
-                            if (rows[iComponent]) {
 
-                                return (
-                                    <div className="ikCol" key={`grid_row_${iRow}_col_${iCol}`}>
-                                        {rows[iComponent][`professional.name`]}
-                                        
-                                    </div>
-                                );
-
-                            }
+                            return (
+                                <div className="ikCol25" 
+                                    key={`grid_row_${iRow}_col_${iCol}`}
+                                >
+                                    {rows[iComponent] &&
+                                    <NavLink to={`/music/artists/${rows[iComponent][`professional.id`]}`}
+                                        className="musicPro"
+                                    >
+                                        <h2>
+                                            {rows[iComponent][`professional.name`]}
+                                        </h2>
+                                        <div className="ikTextCenter">
+                                            <APIImage path={`/api/professionals/${rows[iComponent][`professional.id`]}/image`}
+                                                alt={rows[iComponent][`professional.name`]}
+                                            />
+                                        </div>
+                                    </NavLink>
+                                    }
+                                </div>
+                            );
                         })}
 
                     </div>
