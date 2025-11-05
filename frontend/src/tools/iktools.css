@@ -162,3 +162,16 @@
 .ikPaddingR35 { padding-right: 35px; }
 .ikPaddingV35 { padding: 35px; padding-bottom: 35px; }
 .ikPaddingH35 { padding-left: 35px; padding-right: 35px; }
+
+.ikMarginT40 { margin-top: 40px; }
+.ikMarginLB40 { margin-bottom: 40px; }
+.ikMarginL40 { margin-left: 40px; }
+.ikMarginR40 { margin-right: 40px; }
+.ikMarginV40 { margin-top: 40px; margin-bottom: 40px; }
+.ikMarginH40 { margin-left: 40px; margin-right: 40px; }
+.ikPaddingT40 { padding: 40px; }
+.ikPaddingLB40 { padding-bottom: 40px; }
+.ikPaddingL40 { padding-left: 40px; }
+.ikPaddingR40 { padding-right: 40px; }
+.ikPaddingV40 { padding: 40px; padding-bottom: 40px; }
+.ikPaddingH40 { padding-left: 40px; padding-right: 40px; }
