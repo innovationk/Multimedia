@@ -50,6 +50,26 @@ function MusicPros({
         { rows.length > 0 &&
             <div className="musicSection">
                 <div className="h1">{firstChar.toUpperCase()}</div>
+
+                {[...Array(rows.length)].map((_, iRow) => (
+                    <div className="ikRow" key={`grid_row_${iRow}`}>
+
+                        {[...Array(4)].map((_, iCol) => {
+                            const iComponent = iRow * 4 + iCol;
+                            if (rows[iComponent]) {
+
+                                return (
+                                    <div className="ikCol" key={`grid_row_${iRow}_col_${iCol}`}>
+                                        {rows[iComponent][`professional.name`]}
+                                        
+                                    </div>
+                                );
+
+                            }
+                        })}
+
+                    </div>
+                ))}
             </div>
         }
     </>
