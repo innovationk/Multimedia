@@ -69,10 +69,11 @@ function MusicPros({
                                         <APIImage path={`/api/professionals/${rows[iComponent][`professional.id`]}/image`}
                                             alt={rows[iComponent][`professional.name`]}
                                         />
-                                        <h2>
-                                            {rows[iComponent][`professional.name`]}
-                                        </h2>
-                                        
+                                        <div className="ikPaddingH10">
+                                            <h2 className="ikMarginT10">
+                                                {rows[iComponent][`professional.name`]}
+                                            </h2>
+                                        </div>
                                     </NavLink>
                                     }
                                 </div>
