@@ -66,14 +66,13 @@ function MusicPros({
                                     <NavLink to={`/music/artists/${rows[iComponent][`professional.id`]}`}
                                         className="musicPro"
                                     >
+                                        <APIImage path={`/api/professionals/${rows[iComponent][`professional.id`]}/image`}
+                                            alt={rows[iComponent][`professional.name`]}
+                                        />
                                         <h2>
                                             {rows[iComponent][`professional.name`]}
                                         </h2>
-                                        <div className="ikTextCenter">
-                                            <APIImage path={`/api/professionals/${rows[iComponent][`professional.id`]}/image`}
-                                                alt={rows[iComponent][`professional.name`]}
-                                            />
-                                        </div>
+                                        
                                     </NavLink>
                                     }
                                 </div>

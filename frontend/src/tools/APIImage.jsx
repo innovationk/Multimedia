@@ -54,7 +54,7 @@ function APIImage({
                 <img src={imageData} 
                     className={cssClasses} 
                     style={cssStyle} 
-                    alt=""
+                    alt={alt}
                 />
             }
         </div>

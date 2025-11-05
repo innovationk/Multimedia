@@ -28,14 +28,16 @@ body {
 
 a {
     text-decoration: none;
-    display: inline-flex;
-    align-items: center;
+    display: block;
+    /* display: inline-flex;
+    align-items: center; */
     color: inherit;
     font-family: inherit;
     cursor: pointer;
 }
 a:hover {
-    text-decoration: underline;
+    /* text-decoration: underline; */
+    text-decoration: none;
 }
 
 select,
@@ -169,16 +171,18 @@ h4 { font-size: 16px; margin-bottom: 10px; }
     border: 1px solid lightgray;
     border-radius: 20px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-    padding: 20px 10px 20px 10px;
 }
 .musicPro:hover {
     box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
 }
 .musicPro h2 {
     text-align: center;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .musicPro img {
-    border-radius: 20px;
-    width: 200px;
-    height: 200px;
+    object-fit: cover;
+    border-radius: 20px 20px 0px 0px;
+    width: 100%;
 }
