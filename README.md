@@ -37,6 +37,12 @@ ffmpeg -i myMovie.mkv -map 0:v -map 0:a:0 -c:v copy -c:a aac myMovie.mp4
 -c:a aac: Encodes audio to AAC (required for MP4 compatibility).
 ```
 
+### Audio
 
+Check adminend/tools.
 
-curl -v -H "Range: bytes=0-1000000" https://backend.multimedia.innovationk.fr/api/movies/1/stream
+```
+ffmpeg -i input.flac -codec:a libmp3lame -qscale:a 0 output.mp3
+
+-qscale:a 0 sets high quality (adjust between 0–9, where 0 is best).
+```

@@ -23,10 +23,10 @@ function LocalMovieScreen() {
     const [videoSrc, setVideoSrc] = useState(null);
 
     useEffect(() => {
-        fetchRows();
+        fetchRow();
     }, []);
 
-    const fetchRows = async () => {
+    const fetchRow = async () => {
         let _row = {};
 
         const response = await APITools.send({

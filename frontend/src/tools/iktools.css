@@ -47,6 +47,14 @@
 .ikTextLeft { text-align: left; }
 .ikTextRight { text-align: right; }
 
+.ikRound4 { border-radius: 4px; }
+.ikRound8 { border-radius: 8px; }
+.ikRound10 { border-radius: 10px; }
+.ikRound12 { border-radius: 12px; }
+.ikRound15 { border-radius: 15px; }
+.ikRound16 { border-radius: 16px; }
+.ikRound20 { border-radius: 20px; }
+
 .ikMarginT8 { margin-top: 4px; }
 .ikMarginB4 { margin-bottom: 4px; }
 .ikMarginL4 { margin-left: 4px; }

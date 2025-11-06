@@ -81,7 +81,7 @@ function MusicPros({
 
                             let url = "";
                             if(rows[iComponent]) {
-                                url = `/music/artists/${rows[iComponent][`professional.id`]}`;
+                                url = `/music/artists/${rows[iComponent][`professional.id`]}/albums`;
                             }
 
                             return (
@@ -93,13 +93,13 @@ function MusicPros({
                                         <NavLink to={url}>
                                             <div>
                                                 <APIImage path={`/api/professionals/${rows[iComponent][`professional.id`]}/image`}
-                                                    alt={rows[iComponent][`professional.name`]}
+                                                    alt={`${rows[iComponent][`professional.name`]} ${rows[iComponent][`professional.surname`]}`}
                                                     timestamp={new Date().valueOf()}
                                                 />
                                             </div>
                                             <div className="ikPaddingH10 ikRow ikAlignVMiddle">
                                                 <h2 className="ikMarginT10 ikCol">
-                                                    {rows[iComponent][`professional.name`]}
+                                                    {rows[iComponent][`professional.name`]} {rows[iComponent][`professional.surname`]}
                                                 </h2>
                                             </div>
                                         </NavLink>

@@ -12,6 +12,7 @@ import MoviesScreen from './screens/movie/MoviesScreen';
 // import ExternalMovieScreen from './screens/movie/ExternalMovieScreen';
 import LocalMovieScreen from './screens/movie/LocalMovieScreen';
 import MusicScreen from './screens/music/MusicScreen';
+import ProAlbums from './screens/music/ProAlbums';
 
 const ProtectedRoute = ({ children }) => {
     const [authState, setAuthState] = useState(0);
@@ -84,6 +85,13 @@ function App() {
                     <MainStructure>
                         <ProtectedRoute>
                             <MusicScreen />
+                        </ProtectedRoute>
+                    </MainStructure>
+                } />
+                <Route path={`/music/artists/:professionalId/albums`} element={
+                    <MainStructure>
+                        <ProtectedRoute>
+                            <ProAlbums />
                         </ProtectedRoute>
                     </MainStructure>
                 } />
