@@ -8,8 +8,9 @@ import EventBus from '../../tools/EventBus';
 import Modal from '../../theme/Modal';
 import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
-import Mandatory from "../../components/Mandatory";
+import Mandatory from "../../tools/Mandatory";
 import AppEvents from "../../theme/AppEvents";
+import ImageInput from "../../tools/ImageInput";
 
 
 function ProfessionalForm({
@@ -25,6 +26,7 @@ function ProfessionalForm({
 
     const [name, set_name] = useState("");
     const [surname, set_surname] = useState("");
+    const imageInputRef = useRef(null);
 
     useEffect(() => {
         if(initRow[`professional.id`]) {
@@ -36,26 +38,35 @@ function ProfessionalForm({
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        let path = `/api/professionals`;
+        if(action === APITools.Methods.PUT || action === APITools.Methods.DELETE) {
+            path += `/${initRow['professional.id']}`;
+        }
+
         let inputs = {
             token_id: ACCOUNT.token_id,
             token: ACCOUNT.token,
-            name: name,
-            surname: surname,
-            music: 1,
         };
+        if(action === APITools.Methods.POST || action === APITools.Methods.PUT) {
+            inputs.music = 1;
+            inputs.name = name;
+            inputs.surname = surname;
 
-        let path = `/api/professionals`;
-        if(action === APITools.Methods.PUT || action === APITools.Methods.DELETE) {
-            path += `/${initRow['professional.id']}`
+            if (!imageInputRef.current.isEmpty()) {
+                inputs.image = imageInputRef.current.getValue();
+            }
         }
+
         const response = await APITools.send({
             method: action,
             path: path,
             body: inputs
         });
         if (response.apiStatus >= 200 && response.apiStatus < 300) {
+
             EventBus.dispatch(AppEvents.MusicNewArtist, { name: name });
             onSaveDB();
+
         } else {
             showMessage(firtsLetterUppercase(t('wrong_inputs')));
         }
@@ -71,7 +82,7 @@ function ProfessionalForm({
             { (action === APITools.Methods.POST || action === APITools.Methods.PUT) &&
             <form onSubmit={handleSubmit}>
                 <div className="ikMarginT20">
-                    <div className="ikMarginB4">
+                    <div>
                         <label>
                             {firtsLetterUppercase(t('name'))} <Mandatory />
                         </label>
@@ -85,7 +96,7 @@ function ProfessionalForm({
                 </div>
 
                 <div className="ikMarginT20">
-                    <div className="ikMarginB4">
+                    <div>
                         <label>
                             {firtsLetterUppercase(t('surname'))}
                         </label>
@@ -96,6 +107,12 @@ function ProfessionalForm({
                             className="ikW100"
                         />
                     </div>
+                </div>
+
+                <div className="ikMarginT20">
+                    <ImageInput ref={imageInputRef}
+                        placeholder={firtsLetterUppercase(t('image'))}
+                    />
                 </div>
 
                 <div className="ikMarginT20">

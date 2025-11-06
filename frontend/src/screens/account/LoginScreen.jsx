@@ -8,7 +8,7 @@ import EventBus from '../../tools/EventBus';
 import AppEvents from '../../theme/AppEvents';
 import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
-import Mandatory from '../../components/Mandatory'
+import Mandatory from '../../tools/Mandatory'
 import InputPassword from "./InputPassword";
 
 

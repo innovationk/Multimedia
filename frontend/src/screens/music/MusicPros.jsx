@@ -93,6 +93,7 @@ function MusicPros({
                                         <div>
                                             <APIImage path={`/api/professionals/${rows[iComponent][`professional.id`]}/image`}
                                                 alt={rows[iComponent][`professional.name`]}
+                                                timestamp={new Date().valueOf()}
                                             />
                                         </div>
                                         <div className="ikPaddingH10 ikRow ikAlignVMiddle">
