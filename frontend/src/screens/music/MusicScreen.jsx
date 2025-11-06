@@ -10,6 +10,7 @@ import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
 import MusicPros from "./MusicPros";
 import ProfessionalForm from "../professional/ProfessionalForm";
+import PlusIcon from "../../assets/icons/PlusIcon";
 
 
 function MusicScreen() {
@@ -43,7 +44,7 @@ function MusicScreen() {
                     modalCURef.current.setIsOpen(true);
                 }}
             >
-                <b className="ikMarginH8 ikMarginV4">&#x2b;</b>
+                <PlusIcon width={25} height={25}/>
             </button>
         </div>
         }

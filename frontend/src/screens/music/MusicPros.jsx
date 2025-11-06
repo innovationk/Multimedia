@@ -90,17 +90,19 @@ function MusicPros({
                                 >
                                     {rows[iComponent] &&
                                     <div className="musicPro">
-                                        <div>
-                                            <APIImage path={`/api/professionals/${rows[iComponent][`professional.id`]}/image`}
-                                                alt={rows[iComponent][`professional.name`]}
-                                                timestamp={new Date().valueOf()}
-                                            />
-                                        </div>
-                                        <div className="ikPaddingH10 ikRow ikAlignVMiddle">
-                                            <h2 className="ikMarginT10 ikCol">
-                                                {rows[iComponent][`professional.name`]}
-                                            </h2>
-                                        </div>
+                                        <NavLink to={url}>
+                                            <div>
+                                                <APIImage path={`/api/professionals/${rows[iComponent][`professional.id`]}/image`}
+                                                    alt={rows[iComponent][`professional.name`]}
+                                                    timestamp={new Date().valueOf()}
+                                                />
+                                            </div>
+                                            <div className="ikPaddingH10 ikRow ikAlignVMiddle">
+                                                <h2 className="ikMarginT10 ikCol">
+                                                    {rows[iComponent][`professional.name`]}
+                                                </h2>
+                                            </div>
+                                        </NavLink>
                                         { ACCOUNT.admin === 1 &&
                                         <div className="ikRow">
                                             <div className="ikCol50">
