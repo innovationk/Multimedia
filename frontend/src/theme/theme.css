@@ -112,6 +112,19 @@ h4 { font-size: 16px; margin-bottom: 10px; }
   stroke: var(--colour1);
 }
 
+.line1 {
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--colour1);
+}
+.line2 {
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--colour2);
+}
+
 /* #endregion THEME */
 
 /* #region MODAL */
@@ -168,7 +181,7 @@ h4 { font-size: 16px; margin-bottom: 10px; }
 .buttonConfirmDelete {
     background-color: crimson;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     padding-top: 5px;
     padding-bottom: 2px;
     padding-left: 5px;
@@ -199,6 +212,10 @@ h4 { font-size: 16px; margin-bottom: 10px; }
     background-color: var(--colour1);
     border: none;
     border-radius: 8px;
+    padding-top: 5px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
     color: white;
 }
 .buttonEdit path {
@@ -308,4 +325,12 @@ h4 { font-size: 16px; margin-bottom: 10px; }
 .musicPro .buttonEdit {
     border-radius: 0px 0px 20px 0px;
     height: 40px;
+}
+
+/* .album {
+
+} */
+.albumSubtitle {
+    font-style: italic;
+    font-weight: bold;
 }

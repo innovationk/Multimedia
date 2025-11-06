@@ -23,8 +23,10 @@
     "label": "label",
     "title": "titre",
     "description": "description",
+    "year": "année",
     "music": "musique",
     "artist": "artiste",
+    "album": "album",
     "name": "prénom",
     "surname": "nom de famille",
     "image": "image"

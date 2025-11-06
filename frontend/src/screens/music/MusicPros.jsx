@@ -33,9 +33,9 @@ function MusicPros({
     useEffect(() => {
         fetchRows();
 
-        EventBus.on(AppEvents.MusicNewArtist, triggerFetch);
+        EventBus.on(AppEvents.MusicArtist, triggerFetch);
         return () => {
-            EventBus.remove(AppEvents.MusicNewArtist, triggerFetch);
+            EventBus.remove(AppEvents.MusicArtist, triggerFetch);
         };
     }, []);
 

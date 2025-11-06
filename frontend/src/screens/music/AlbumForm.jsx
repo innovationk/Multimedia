@@ -13,7 +13,7 @@ import AppEvents from "../../theme/AppEvents";
 import ImageInput from "../../tools/ImageInput";
 
 
-function ProfessionalForm({
+function AlbumForm({
     initRow = {},
     action = APITools.Methods.POST,
     onSaveDB = (() => { }),
@@ -24,23 +24,23 @@ function ProfessionalForm({
 
     const ACCOUNT = LocalStorageTools.readData({ key: "account" });
 
-    const [name, set_name] = useState("");
-    const [surname, set_surname] = useState("");
+    const [title, set_title] = useState("");
+    const [year, set_year] = useState(new Date().getFullYear());
     const imageInputRef = useRef(null);
 
     useEffect(() => {
-        if(initRow[`professional.id`]) {
-            set_name(initRow[`professional.name`]);
-            set_surname(initRow[`professional.surname`]);
+        if(initRow[`album.id`]) {
+            set_title(initRow[`album.title`]);
+            set_year(initRow[`album.year`]);
         }
     }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let path = `/api/professionals`;
+        let path = `/api/albums`;
         if(action === APITools.Methods.PUT || action === APITools.Methods.DELETE) {
-            path += `/${initRow['professional.id']}`;
+            path += `/${initRow['album.id']}`;
         }
 
         let inputs = {
@@ -48,9 +48,12 @@ function ProfessionalForm({
             token: ACCOUNT.token,
         };
         if(action === APITools.Methods.POST || action === APITools.Methods.PUT) {
-            inputs.music = 1;
-            inputs.name = name;
-            inputs.surname = surname;
+            if(action === APITools.Methods.POST){
+                inputs.professional_id = initRow[`album.professional_id`];
+            }
+
+            inputs.title = title;
+            inputs.year = year;
 
             if (!imageInputRef.current.isEmpty()) {
                 inputs.image = imageInputRef.current.getValue();
@@ -64,7 +67,7 @@ function ProfessionalForm({
         });
         if (response.apiStatus >= 200 && response.apiStatus < 300) {
 
-            EventBus.dispatch(AppEvents.MusicArtist, { name: name });
+            EventBus.dispatch(AppEvents.MusicArtist, { title: title });
             onSaveDB();
 
         } else {
@@ -76,7 +79,7 @@ function ProfessionalForm({
     return (
         <>
             <h2>
-                {firtsLetterUppercase(t('artist'))}
+                {firtsLetterUppercase(t('album'))}
             </h2>
             
             { (action === APITools.Methods.POST || action === APITools.Methods.PUT) &&
@@ -84,13 +87,13 @@ function ProfessionalForm({
                 <div className="ikMarginT20">
                     <div>
                         <label>
-                            {firtsLetterUppercase(t('name'))} <Mandatory />
+                            {firtsLetterUppercase(t('title'))} <Mandatory />
                         </label>
                     </div>
                     <input type="text" required
-                        value={name}
-                        onChange={(e) => { set_name(e.target.value || ""); }}
-                        placeholder={firtsLetterUppercase(t('name'))}
+                        value={title}
+                        onChange={(e) => { set_title(e.target.value || ""); }}
+                        placeholder={firtsLetterUppercase(t('title'))}
                         className="ikW100"
                     />
                 </div>
@@ -98,13 +101,15 @@ function ProfessionalForm({
                 <div className="ikMarginT20">
                     <div>
                         <label>
-                            {firtsLetterUppercase(t('surname'))}
+                            {firtsLetterUppercase(t('year'))}
                         </label>
                     </div>
-                    <input type="text"
-                        value={surname}
-                        onChange={(e) => { set_surname(e.target.value || ""); }}
-                        placeholder={firtsLetterUppercase(t('surname'))}
+                    <input type="number" required
+                        value={year + ''}
+                        onChange={(e) => { set_year(parseFloat(e.target.value, 10) || 0.00); }}
+                        placeholder={firtsLetterUppercase(t('year'))}
+                        step={1}
+                        min={0}
                         className="ikW100"
                     />
                 </div>
@@ -129,7 +134,7 @@ function ProfessionalForm({
                         {firtsLetterUppercase(t('ask_confirm_delete'))}
                     </div>
                     <div className="ikMarginT20">
-                        {name} {surname}
+                        {title}
                     </div>
                     <div className="ikMarginT20">
                         <button type='submit' className='buttonDelete ikW100 ikPaddingV10 ikPaddingH10'>
@@ -141,4 +146,4 @@ function ProfessionalForm({
         </>
     )
 }
-export default ProfessionalForm;
+export default AlbumForm;

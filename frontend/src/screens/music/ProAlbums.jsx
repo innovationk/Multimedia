@@ -10,9 +10,11 @@ import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
 import APIImage from "../../tools/APIImage";
 import ArrowLeftIcon from "../../assets/icons/ArrowLeftIcon";
+import PlusIcon from "../../assets/icons/PlusIcon";
 import DeleteIcon from "../../assets/icons/DeleteIcon";
 import EditIcon from "../../assets/icons/EditIcon";
 import Modal from "../../theme/Modal";
+import AlbumForm from "./AlbumForm";
 
 
 function ProAlbums() {
@@ -24,25 +26,25 @@ function ProAlbums() {
 
     const { professionalId } = useParams();
 
-    const [row, setRow] = useState({});
+    const [mainEntity, setMainEntity] = useState({});
 
-    // const modalCURef = useRef(null);
-    // const [modalAction, setModalAction] = useState(APITools.Methods.POST);
-    // const [modalObject, setModalObject] = useState({});
+    const modalCURef = useRef(null);
+    const [modalAction, setModalAction] = useState(APITools.Methods.POST);
+    const [modalObject, setModalObject] = useState({});
     
-    // const [rows, setRows] = useState([]);
+    const [rows, setRows] = useState([]);
 
     useEffect(() => {
-        fetchRow();
-    //     fetchRows();
+        fetchMainEntity();
+        fetchRows();
 
-    //     EventBus.on(AppEvents.MusicNewArtist, triggerFetch);
-    //     return () => {
-    //         EventBus.remove(AppEvents.MusicNewArtist, triggerFetch);
-    //     };
+        EventBus.on(AppEvents.MusicAlbum, fetchMainEntity);
+        return () => {
+            EventBus.remove(AppEvents.MusicAlbum, fetchMainEntity);
+        };
     }, []);
 
-    const fetchRow = async () => {
+    const fetchMainEntity = async () => {
         let _row = {};
 
         const response = await APITools.send({
@@ -53,35 +55,28 @@ function ProAlbums() {
             _row = response.row;
         }
 
-        setRow(_row);
+        setMainEntity(_row);
     };
 
-    // const triggerFetch = async (payload) => {
-    //     if(payload.name.toLowerCase().startsWith(firstChar)) {
-    //         fetchRows();
-    //     }
-    // };
+    const fetchRows = async () => {
+        let _rows = [];
 
-    // const fetchRows = async () => {
-    //     let _rows = [];
+        const response = await APITools.send({
+            method: APITools.Methods.GET,
+            path: `/api/albums`,
+            query: {
+                and_professional_id_eq: professionalId,
+                and_state_like: APITools.RowsStates.ACTIVE,
+                sort: 'year_ASC,title_ASC',
+                elements_per_page: Number.MAX_SAFE_INTEGER
+            }
+        });
+        if (response.apiStatus === 200) {
+            _rows = response.rows;
+        }
 
-    //     const response = await APITools.send({
-    //         method: APITools.Methods.GET,
-    //         path: `/api/professionals`,
-    //         query: {
-    //             and_music_eq: 1,
-    //             and_name_like: `${firstChar}%`,
-    //             and_state_like: APITools.RowsStates.ACTIVE,
-    //             sort: 'name_ASC',
-    //             elements_per_page: Number.MAX_SAFE_INTEGER
-    //         }
-    //     });
-    //     if (response.apiStatus === 200) {
-    //         _rows = response.rows;
-    //     }
-
-    //     setRows(_rows);
-    // };
+        setRows(_rows);
+    };
 
 
     return(
@@ -95,21 +90,101 @@ function ProAlbums() {
         <div className="ikRow ikRowPaddingH4">
             <div className="ikCol33">
                 <APIImage path={`/api/professionals/${professionalId}/image`}
-                    alt={`${row[`professional.name`]} ${row[`professional.surname`]}`}
+                    alt={`${mainEntity[`professional.name`]} ${mainEntity[`professional.surname`]}`}
                     timestamp={new Date().valueOf()}
                     cssClasses={`ikW100 ikH100 ikRound8`}
                 />
             </div>
             <div className="ikCol66">
                 <h1 className="ikTextCenter">
-                    {row[`professional.name`]} {row[`professional.surname`]}
+                    {mainEntity[`professional.name`]} {mainEntity[`professional.surname`]}
                 </h1>
             </div>
         </div>
 
-        <div className="ikMarginV40">
-            
+        <div className="line1"></div>
+
+        { ACCOUNT.admin === 1 &&
+        <div className="ikTextRight ikMarginB40">
+            <button className="button1"
+                onClick={(e) => {
+                    e.preventDefault();
+                    setModalAction(APITools.Methods.POST);
+                    setModalObject({
+                        [`album.professional_id`]: professionalId
+                    });
+                    modalCURef.current.setIsOpen(true);
+                }}
+            >
+                <PlusIcon width={25} height={25}/>
+            </button>
         </div>
+        }
+
+        <div>
+            {rows.map((row, iRow) => (
+            <div key={iRow} 
+                className="album ikMarginB20"
+            >
+                <div className="ikRow ikRowPaddingH4">
+                    <div className="ikCol33">
+                        <APIImage path={`/api/albums/${row[`album.id`]}/image`}
+                            alt={`${row[`album.title`]}`}
+                            timestamp={new Date().valueOf()}
+                            cssClasses={`ikW100 ikH100 ikRound8`}
+                        />
+                    </div>
+                    <div className="ikCol66 ikAlignVTop">
+                        { ACCOUNT.admin === 1 &&
+                        <div className="ikRow ikRowPaddingH4 ikMarginB20">
+                            <div className="ikCol50">
+                                <button className="ikW100 buttonConfirmDelete"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setModalAction(APITools.Methods.DELETE);
+                                        setModalObject(row);
+                                        modalCURef.current.setIsOpen(true);
+                                    }}
+                                >
+                                    <DeleteIcon width={25} height={25}/>
+                                </button>
+                            </div>
+                            <div className="ikCol50">
+                                <button className="ikW100 buttonEdit"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setModalAction(APITools.Methods.PUT);
+                                        setModalObject(row);
+                                        modalCURef.current.setIsOpen(true);
+                                    }}
+                                >
+                                    <EditIcon width={25} height={25}/>
+                                </button>
+                            </div>
+                        </div>
+                        }
+                        <h2>
+                            {row[`album.title`]}
+                        </h2>
+                        <div className="albumSubtitle">
+                            {row[`album.year`]}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ))}
+        </div>
+
+        <Modal ref={modalCURef}>
+            <AlbumForm
+                initRow={modalObject}
+                action={modalAction}
+                onSaveDB={() => {
+                    fetchRows();
+                    modalCURef.current.setIsOpen(false);
+                }}
+            />
+        </Modal>
     </>
     );
 }

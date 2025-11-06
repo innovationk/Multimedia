@@ -1,12 +1,12 @@
 import Controller from '../controller.js';
-import ProfessionalTable from "./professional_table.js";
+import AlbumTable from "./album_table.js";
 import fs from 'node:fs';
 import FsTools from "../../tools/fs_tools.js";
 
-const PATH_UPLOAD = `${process.cwd()}/uploads/professionals`;
+const PATH_UPLOAD = `${process.cwd()}/uploads/albums`;
 
-export default class ProfessionalController extends Controller {
-    static _mainTable = ProfessionalTable;
+export default class AlbumController extends Controller {
+    static _mainTable = AlbumTable;
 
     static async create(req, res, next) {
         await super.create(req, res, next, async ({ row }) => {

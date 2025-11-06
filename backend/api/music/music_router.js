@@ -1,31 +1,58 @@
 import { Router } from "express";
-import MusicAlbumController from "./musicalbum_controller.js";
-import MusicSongController from "./musicsong_controller.js";
+import AlbumController from "./album_controller.js";
+import SongController from "./song_controller.js";
+import AccountController from "../account/account_controller.js";
 
 const router = new Router();
 
 router
-    .route("/music/albums")
-    .get((req, res, next) => MusicAlbumController.list(req, res, next))
-    // .post((req, res, next) => MusicAlbumController.create(req, res, next))
+    .route("/albums")
+    .get((req, res, next) => AlbumController.list(req, res, next))
+    .post(
+        (req, res, next) => AccountController.checkAuthorisedAccount(req, res, next,  {
+            and_admin_eq: 1
+        }),
+        (req, res, next) => AlbumController.create(req, res, next)
+    );
 ;
 
 router
-    .route("/music/albums/:primaryValue")
-    .get((req, res, next) => MusicAlbumController.read(req, res, next))
-//     .put((req, res, next) => MusicAlbumController.update(req, res, next))
+    .route("/albums/:primaryValue")
+    .get((req, res, next) => AlbumController.read(req, res, next))
+    .put(
+        (req, res, next) => AccountController.checkAuthorisedAccount(req, res, next,  {
+            and_admin_eq: 1
+        }),
+        (req, res, next) => AlbumController.update(req, res, next)
+    )
+    .delete((req, res, next) => AlbumController.tagDeleted(req, res, next))
 ;
 
 router
-    .route("/music/songs")
-    .get((req, res, next) => MusicSongController.list(req, res, next))
-    // .post((req, res, next) => MusicSongController.create(req, res, next))
+    .route("/albums/:primaryValue/image")
+    .get((req, res, next) => AlbumController.getImage(req, res, next))
 ;
 
 router
-    .route("/music/songs/:primaryValue")
-    .get((req, res, next) => MusicSongController.read(req, res, next))
-//     .put((req, res, next) => MusicSongController.update(req, res, next))
+    .route("/songs")
+    .get((req, res, next) => SongController.list(req, res, next))
+    .post(
+        (req, res, next) => AccountController.checkAuthorisedAccount(req, res, next,  {
+            and_admin_eq: 1
+        }),
+        (req, res, next) => SongController.create(req, res, next)
+    );
+;
+
+router
+    .route("/songs/:primaryValue")
+    .get((req, res, next) => SongController.read(req, res, next))
+    .put(
+        (req, res, next) => AccountController.checkAuthorisedAccount(req, res, next,  {
+            and_admin_eq: 1
+        }),
+        (req, res, next) => SongController.update(req, res, next)
+    )
 ;
 
 export default router;
