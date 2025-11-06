@@ -9,6 +9,8 @@ import AppEvents from '../../theme/AppEvents';
 import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
 import APIImage from "../../tools/APIImage";
+import DeleteIcon from "../../assets/icons/DeleteIcon";
+import EditIcon from "../../assets/icons/EditIcon";
 
 
 function MusicPros({
@@ -18,6 +20,8 @@ function MusicPros({
     const navigate = useNavigate();
     const { showMessage } = useFeedbackMessage();
 
+    const ACCOUNT = LocalStorageTools.readData({ key: "account" });
+    
     const [rows, setRows] = useState([]);
 
     useEffect(() => {
@@ -90,6 +94,20 @@ function MusicPros({
                                                 {rows[iComponent][`professional.name`]}
                                             </h2>
                                         </div>
+                                        { ACCOUNT.admin === 1 &&
+                                        <div className="ikRow">
+                                            <div className="ikCol50">
+                                                <button className="ikW100 buttonConfirmDelete">
+                                                    <DeleteIcon width={25} height={25}/>
+                                                </button>
+                                            </div>
+                                            <div className="ikCol50">
+                                                <button className="ikW100 buttonEdit">
+                                                    <EditIcon width={25} height={25}/>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        }
                                     </div>
                                     }
                                 </div>

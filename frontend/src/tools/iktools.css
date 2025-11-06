@@ -23,8 +23,10 @@
 .ikRowPaddingV4:not(:first-child) { padding-top: 4px; }
 .ikRowPaddingV4:not(:last-child) { padding-bottom: 4px; }
 
-.ikRowPaddingH4 [class*="ikCol"]:not(:first-child) { padding-left: 4px; }
-.ikRowPaddingH4 [class*="ikCol"]:not(:last-child) { padding-right: 4px; }
+.ikRowPaddingH0 > [class*="ikCol"]:not(:first-child) { padding-left: 0px; }
+.ikRowPaddingH0 > [class*="ikCol"]:not(:last-child) { padding-right: 0px; }
+.ikRowPaddingH4 > [class*="ikCol"]:not(:first-child) { padding-left: 4px; }
+.ikRowPaddingH4 > [class*="ikCol"]:not(:last-child) { padding-right: 4px; }
 
 .ikRelative {
     position: relative;

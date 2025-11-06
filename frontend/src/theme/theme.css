@@ -172,10 +172,30 @@ h4 { font-size: 16px; margin-bottom: 10px; }
     padding-bottom: 2px;
     padding-left: 5px;
     padding-right: 5px;
+    color: white;
+}
+.buttonConfirmDelete path {
+    stroke: white;
+    fill: white;
 }
 .closeTopRightButton {
     background-color: white;
     border: none;
+}
+
+.buttonEdit {
+    background-color: var(--colour1);
+    border: none;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: white;
+}
+.buttonEdit path {
+    stroke: white;
+    fill: white;
 }
 
 /* #endregion MODAL */
@@ -263,4 +283,12 @@ h4 { font-size: 16px; margin-bottom: 10px; }
     .musicPro img {
         height: 150px;
     }
+}
+.musicPro .buttonConfirmDelete {
+    border-radius: 0px 0px 0px 20px;
+    height: 40px;
+}
+.musicPro .buttonEdit {
+    border-radius: 0px 0px 20px 0px;
+    height: 40px;
 }
