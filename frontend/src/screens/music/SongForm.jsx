@@ -10,10 +10,9 @@ import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
 import Mandatory from "../../tools/Mandatory";
 import AppEvents from "../../theme/AppEvents";
-import ImageInput from "../../tools/ImageInput";
 
 
-function AlbumForm({
+function SongForm({
     initRow = {},
     action = APITools.Methods.POST,
     onSaveDB = (() => { }),
@@ -25,22 +24,22 @@ function AlbumForm({
     const ACCOUNT = LocalStorageTools.readData({ key: "account" });
 
     const [title, set_title] = useState("");
-    const [year, set_year] = useState(new Date().getFullYear());
-    const imageInputRef = useRef(null);
+    const [track, set_track] = useState(0);
+    // const imageInputRef = useRef(null);
 
     useEffect(() => {
-        if(initRow[`album.id`]) {
-            set_title(initRow[`album.title`]);
-            set_year(initRow[`album.year`]);
+        if(initRow[`song.id`]) {
+            set_title(initRow[`song.title`]);
+            set_track(initRow[`song.track`]);
         }
     }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let path = `/api/albums`;
+        let path = `/api/songs`;
         if(action === APITools.Methods.PUT || action === APITools.Methods.DELETE) {
-            path += `/${initRow['album.id']}`;
+            path += `/${initRow['song.id']}`;
         }
 
         let inputs = {
@@ -49,15 +48,15 @@ function AlbumForm({
         };
         if(action === APITools.Methods.POST || action === APITools.Methods.PUT) {
             if(action === APITools.Methods.POST){
-                inputs.professional_id = initRow[`album.professional_id`];
+                inputs.album_id = initRow[`song.album_id`];
             }
 
             inputs.title = title;
-            inputs.year = year;
+            inputs.track = track;
 
-            if (!imageInputRef.current.isEmpty()) {
-                inputs.image = imageInputRef.current.getValue();
-            }
+            // if (!imageInputRef.current.isEmpty()) {
+            //     inputs.image = imageInputRef.current.getValue();
+            // }
         }
 
         const response = await APITools.send({
@@ -67,7 +66,7 @@ function AlbumForm({
         });
         if (response.apiStatus >= 200 && response.apiStatus < 300) {
 
-            EventBus.dispatch(AppEvents.MusicAlbum, {});
+            EventBus.dispatch(AppEvents.Musicsong, {});
             onSaveDB();
 
         } else {
@@ -79,7 +78,7 @@ function AlbumForm({
     return (
         <>
             <h2>
-                {firtsLetterUppercase(t('album'))}
+                {firtsLetterUppercase(t('song'))}
             </h2>
             
             { (action === APITools.Methods.POST || action === APITools.Methods.PUT) &&
@@ -101,13 +100,13 @@ function AlbumForm({
                 <div className="ikMarginT20">
                     <div>
                         <label>
-                            {firtsLetterUppercase(t('year'))}
+                            {firtsLetterUppercase(t('track'))}
                         </label>
                     </div>
                     <input type="number" required
-                        value={year + ''}
-                        onChange={(e) => { set_year(parseFloat(e.target.value, 10) || 0.00); }}
-                        placeholder={firtsLetterUppercase(t('year'))}
+                        value={track + ''}
+                        onChange={(e) => { set_track(parseFloat(e.target.value, 10) || 0.00); }}
+                        placeholder={firtsLetterUppercase(t('track'))}
                         step={1}
                         min={0}
                         className="ikW100"
@@ -115,9 +114,9 @@ function AlbumForm({
                 </div>
 
                 <div className="ikMarginT20">
-                    <ImageInput ref={imageInputRef}
+                    {/* <ImageInput ref={imageInputRef}
                         placeholder={firtsLetterUppercase(t('image'))}
-                    />
+                    /> */}
                 </div>
 
                 <div className="ikMarginT20">
@@ -146,4 +145,4 @@ function AlbumForm({
         </>
     )
 }
-export default AlbumForm;
+export default SongForm;

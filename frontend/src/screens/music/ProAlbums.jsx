@@ -15,6 +15,7 @@ import DeleteIcon from "../../assets/icons/DeleteIcon";
 import EditIcon from "../../assets/icons/EditIcon";
 import Modal from "../../theme/Modal";
 import AlbumForm from "./AlbumForm";
+import AlbumSongs from "./AlbumSongs";
 
 
 function ProAlbums() {
@@ -38,9 +39,9 @@ function ProAlbums() {
         fetchMainEntity();
         fetchRows();
 
-        EventBus.on(AppEvents.MusicAlbum, fetchMainEntity);
+        EventBus.on(AppEvents.MusicAlbum, fetchRows);
         return () => {
-            EventBus.remove(AppEvents.MusicAlbum, fetchMainEntity);
+            EventBus.remove(AppEvents.MusicAlbum, fetchRows);
         };
     }, []);
 
@@ -169,6 +170,9 @@ function ProAlbums() {
                         <div className="albumSubtitle">
                             {row[`album.year`]}
                         </div>
+                        <div>
+                            <AlbumSongs albumId={row[`album.id`]}/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -180,7 +184,6 @@ function ProAlbums() {
                 initRow={modalObject}
                 action={modalAction}
                 onSaveDB={() => {
-                    fetchRows();
                     modalCURef.current.setIsOpen(false);
                 }}
             />

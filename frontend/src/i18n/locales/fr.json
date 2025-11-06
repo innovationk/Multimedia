@@ -27,6 +27,7 @@
     "music": "musique",
     "artist": "artiste",
     "album": "album",
+    "song": "chanson",
     "name": "prénom",
     "surname": "nom de famille",
     "image": "image"

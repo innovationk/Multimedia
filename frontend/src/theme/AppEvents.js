@@ -4,4 +4,5 @@ export default class AppEvents {
 
     static MusicArtist = "musicartist";
     static MusicAlbum = "musicalbum";
+    static MusicSongs = "musicsongs";
 }
