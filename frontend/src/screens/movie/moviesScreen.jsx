@@ -51,13 +51,18 @@ function MoviesScreen() {
             {rows.map((row, index) => (
                 <div key={`row_${index}`} className="ikRow">
                     <div className="ikCol">
-                        <NavLink to={`/movies/${row[`movie.id`]}`}>{row[`movie.title`]} ({row[`movie.language`]})</NavLink>
+                        <NavLink to={`/movies/${row[`movie.id`]}`}>
+                            {row[`movie.title`]} 
+                            { row[`movie.language`] !== APITools.Languages.NONE &&
+                                <>({row[`movie.language`]})</>
+                            }
+                        </NavLink>
                     </div>
-                    <div className="ikCol">
+                    {/* <div className="ikCol">
                         <DownloadButton downloadUrl={`${APITools.getURL({})}/api/movies/${row[`movie.id`]}/download`}
                             title={generateSlug(row[`movie.title`])}
                         />
-                    </div>
+                    </div> */}
                 </div>
             ))}
         </div>

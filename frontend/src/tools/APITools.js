@@ -17,6 +17,12 @@ const RowsStates = {
     DELETED: "deleted"
 };
 
+const Languages = {
+    NONE: "none",
+    FR: "fr",
+    EN: "en"
+};
+
 const DEFAULT_PROTOCOL = import.meta.env.VITE_API_PROTOCOL || Protocols.HTTP;
 const DEFAULT_HOST = import.meta.env.VITE_API_HOST || "localhost";
 const DEFAULT_PORT = import.meta.env.VITE_API_PORT ? parseInt(import.meta.env.VITE_API_PORT) : -1;   
@@ -125,4 +131,5 @@ export default class APITools {
     static get Protocols() { return Protocols; }
     static get Methods() { return Methods; }
     static get RowsStates() { return RowsStates; }
+    static get Languages() { return Languages; }
 }

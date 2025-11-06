@@ -8,7 +8,7 @@ export default class MovieTable extends MariadbTable {
         id: { dataType: MariadbEnums.DataTypes.BIGINT_UNSIGNED, nullable: false, unique: true, autoIncrement: true },
         state: { dataType: MariadbEnums.DataTypes.ENUM, nullable: false, values: Object.values(MariadbEnums.States), default: `"${MariadbEnums.States.ACTIVE}"`, index: true },
 
-        language: { dataType: MariadbEnums.DataTypes.ENUM, nullable: false, values: Object.values(MariadbEnums.LANGUAGES), default: `"${MariadbEnums.LANGUAGES.EN}"`, index: true },
+        language: { dataType: MariadbEnums.DataTypes.ENUM, nullable: false, values: Object.values(MariadbEnums.LANGUAGES), default: `"${MariadbEnums.LANGUAGES.NONE}"`, index: true },
         title: { dataType: MariadbEnums.DataTypes.VARCHAR, length: 512, nullable: false },
 
         updated: { dataType: MariadbEnums.DataTypes.UNIX_TIMESTAMP, nullable: false, default: `(UNIX_TIMESTAMP())`, onUpdate: `(UNIX_TIMESTAMP())` },

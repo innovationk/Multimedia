@@ -107,6 +107,7 @@ export default class MariadbEnums {
     ];
 
     static LANGUAGES = {
+        NONE: "none",
         FR: "fr",
         EN: "en"
     }

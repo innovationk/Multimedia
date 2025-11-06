@@ -10,7 +10,7 @@ import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
 
 
-function MovieScreen() {
+function ExternalMovieScreen() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const { showMessage } = useFeedbackMessage();
@@ -61,4 +61,4 @@ function MovieScreen() {
     </>
     );
 }
-export default MovieScreen;
+export default ExternalMovieScreen;

@@ -9,7 +9,8 @@ import LoginScreen from './screens/account/LoginScreen';
 import LogoutScreen from './screens/account/LogoutScreen';
 import HomeScreen from './screens/home/HomeScreen';
 import MoviesScreen from './screens/movie/MoviesScreen';
-import MovieScreen from './screens/movie/MovieScreen';
+// import ExternalMovieScreen from './screens/movie/ExternalMovieScreen';
+import LocalMovieScreen from './screens/movie/LocalMovieScreen';
 import MusicScreen from './screens/music/MusicScreen';
 
 const ProtectedRoute = ({ children }) => {
@@ -97,11 +98,13 @@ function App() {
                 <Route path={`/movies/:movieId`} element={
                     <MainStructure>
                         <ProtectedRoute>
-                            <MovieScreen />
+                            {/* <ExternalMovieScreen /> */}
+                            <LocalMovieScreen />
                         </ProtectedRoute>
                     </MainStructure>
                 } />
 
+                <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </Router>
     );
