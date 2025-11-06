@@ -11,8 +11,9 @@ export default class ProfessionalController extends Controller {
         const imgPath = `${PATH_UPLOAD}/${req.params.primaryValue}.png`;
         if(fs.existsSync(imgPath)) {
             res.sendFile(imgPath);
+
         } else {
-            res.status(400).send('File not found');
+            res.status(200).send('File not found');
         }
     }
 }

@@ -7,15 +7,24 @@
     width: 100%;
     margin: 0 auto; 
 }
-.ikCol100 { width: 100%; }
-.ikCol50 { width: 50%; }
-.ikCol33 { width: 33.33%; }
-.ikCol66 { width: 66.66%; }
-.ikCol25 { width: 25%; }
+.ikCol100 { width: 100%; max-width: 100%; }
+.ikCol50 { width: 50%; max-width: 50%; }
+.ikCol33 { width: 33.33%; max-width: 33.33%; }
+.ikCol66 { width: 66.66%; max-width: 66.66%; }
+.ikCol25 { width: 25%; max-width: 25%; }
 [class*="ikCol"] {
     display: table-cell;
     vertical-align: middle;
 }
+.ikAlignVMiddle { vertical-align: middle; }
+.ikAlignVTop { vertical-align: top; }
+.ikAlignVBottom { vertical-align: bottom; }
+
+.ikRowPaddingV4:not(:first-child) { padding-top: 4px; }
+.ikRowPaddingV4:not(:last-child) { padding-bottom: 4px; }
+
+.ikRowPaddingH4 [class*="ikCol"]:not(:first-child) { padding-left: 4px; }
+.ikRowPaddingH4 [class*="ikCol"]:not(:last-child) { padding-right: 4px; }
 
 .ikRelative {
     position: relative;

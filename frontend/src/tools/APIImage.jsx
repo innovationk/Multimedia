@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import APITools from "./APITools";
+import Placeholder from "../assets/images/placeholder.png";
 
 function APIImage({
     path = '',
@@ -49,7 +50,11 @@ function APIImage({
     return (
         <div ref={componentRef}>
             {imageData === "" ?
-                <></>
+                <img src={Placeholder} 
+                    className={cssClasses} 
+                    style={cssStyle} 
+                    alt={alt}
+                />
                 :
                 <img src={imageData} 
                     className={cssClasses} 

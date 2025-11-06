@@ -19,5 +19,12 @@
     "pseudo": "pseudo",
     "email": "email",
     "password": "mot de passe",
-    "music": "musique"
+    "label": "label",
+    "title": "titre",
+    "description": "description",
+    "music": "musique",
+    "artist": "artiste",
+    "name": "prénom",
+    "surname": "nom de famille",
+    "image": "image"
 }

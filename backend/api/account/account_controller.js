@@ -116,4 +116,13 @@ export default class AccountController extends Controller {
         });
         res.status(200).json({});
     }
+
+    static async checkAuthorisedAccount(req, res, next, rights = {}) {
+        const account = await AccountTools.getAuthorisedAccount({ token_id: req.body.token_id, token: req.body.token, rights: rights });
+        if (account.hasOwnProperty(`account.id`)) {
+            next();
+        } else {
+            res.status(401).json({ message: MariadbEnums.DEFAULT_UNAUTHORISED_MESSAGE });
+        }
+    }
 }

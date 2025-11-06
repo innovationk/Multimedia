@@ -113,6 +113,73 @@ h4 { font-size: 16px; margin-bottom: 10px; }
 
 /* #endregion THEME */
 
+/* #region MODAL */
+
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.modalContent {
+    background-color: white;
+    margin: auto;    
+    position: relative;
+    padding: 0;
+    outline: 0;
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    animation: animatetop 0.4s;
+    text-align: left;
+}
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+.modalBody {
+    padding: 40px 40px;
+    margin-top: 32px;
+}
+.modalButtonCancel {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: lightgray;
+    border: none;
+    border-radius: 5px;
+}
+.modalButtonConfirm {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.bgDeleteColour {
+    background-color: crimson;
+}
+.buttonConfirmDelete {
+    background-color: crimson;
+    border: none;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.closeTopRightButton {
+    background-color: white;
+    border: none;
+}
+
+/* #endregion MODAL */
+
 /* #region MAIN */
 
 #mainStructure {
@@ -171,15 +238,29 @@ h4 { font-size: 16px; margin-bottom: 10px; }
     border: 1px solid lightgray;
     border-radius: 20px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+    /* overflow: hidden; */
 }
 .musicPro:hover {
     box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
 }
 .musicPro h2 {
     text-align: center;
+    height: 45px;
+    overflow: hidden;
+    word-break: break-word;
+    text-overflow: ellipsis;
 }
 .musicPro img {
     object-fit: cover;
     border-radius: 20px 20px 0px 0px;
     width: 100%;
+    height: 250px;
+}
+@media only screen and (max-width: 768px) {
+    .musicPro h2 {
+        height: 70px;
+    }
+    .musicPro img {
+        height: 150px;
+    }
 }

@@ -22,7 +22,18 @@ function MusicPros({
 
     useEffect(() => {
         fetchRows();
+
+        EventBus.on(AppEvents.MusicNewArtist, triggerFetch);
+        return () => {
+            EventBus.remove(AppEvents.MusicNewArtist, triggerFetch);
+        };
     }, []);
+
+    const triggerFetch = async (payload) => {
+        if(payload.name.toLowerCase().startsWith(firstChar)) {
+            fetchRows();
+        }
+    };
 
     const fetchRows = async () => {
         let _rows = [];
@@ -53,28 +64,33 @@ function MusicPros({
                 <div className="h1">{firstChar.toUpperCase()}</div>
 
                 {[...Array(rows.length)].map((_, iRow) => (
-                    <div className="ikRow " key={`grid_row_${iRow}`}>
+                    <div className="ikRow ikRowPaddingV4 ikRowPaddingH4" key={`grid_row_${iRow}`}>
 
                         {[...Array(4)].map((_, iCol) => {
                             const iComponent = iRow * 4 + iCol;
 
+                            let url = "";
+                            if(rows[iComponent]) {
+                                url = `/music/artists/${rows[iComponent][`professional.id`]}`;
+                            }
+
                             return (
-                                <div className="ikCol25" 
+                                <div className="ikCol25 ikAlignVTop" 
                                     key={`grid_row_${iRow}_col_${iCol}`}
                                 >
                                     {rows[iComponent] &&
-                                    <NavLink to={`/music/artists/${rows[iComponent][`professional.id`]}`}
-                                        className="musicPro"
-                                    >
-                                        <APIImage path={`/api/professionals/${rows[iComponent][`professional.id`]}/image`}
-                                            alt={rows[iComponent][`professional.name`]}
-                                        />
-                                        <div className="ikPaddingH10">
-                                            <h2 className="ikMarginT10">
+                                    <div className="musicPro">
+                                        <div>
+                                            <APIImage path={`/api/professionals/${rows[iComponent][`professional.id`]}/image`}
+                                                alt={rows[iComponent][`professional.name`]}
+                                            />
+                                        </div>
+                                        <div className="ikPaddingH10 ikRow ikAlignVMiddle">
+                                            <h2 className="ikMarginT10 ikCol">
                                                 {rows[iComponent][`professional.name`]}
                                             </h2>
                                         </div>
-                                    </NavLink>
+                                    </div>
                                     }
                                 </div>
                             );
