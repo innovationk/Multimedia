@@ -23,7 +23,8 @@ router
             and_admin_eq: 1
         }),
         (req, res, next) => ProfessionalController.update(req, res, next)
-    );
+    )
+    .delete((req, res, next) => ProfessionalController.tagDeleted(req, res, next))
 ;
 
 router

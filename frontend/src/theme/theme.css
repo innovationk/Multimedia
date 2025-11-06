@@ -183,14 +183,21 @@ h4 { font-size: 16px; margin-bottom: 10px; }
     border: none;
 }
 
+.buttonDelete {
+    background-color: crimson;
+    border: none;
+    border-radius: 8px;
+    color: white;
+}
+.buttonDelete path {
+    stroke: white;
+    fill: white;
+}
+
 .buttonEdit {
     background-color: var(--colour1);
     border: none;
-    border-radius: 5px;
-    padding-top: 5px;
-    padding-bottom: 2px;
-    padding-left: 5px;
-    padding-right: 5px;
+    border-radius: 8px;
     color: white;
 }
 .buttonEdit path {

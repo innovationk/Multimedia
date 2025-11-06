@@ -38,7 +38,6 @@ function MusicScreen() {
             <button className="button1"
                 onClick={(e) => {
                     e.preventDefault();
-
                     setModalAction(APITools.Methods.POST);
                     setModalObject({});
                     modalCURef.current.setIsOpen(true);

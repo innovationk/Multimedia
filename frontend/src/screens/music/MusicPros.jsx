@@ -11,6 +11,8 @@ import CssTools from "../../tools/CssTools";
 import APIImage from "../../tools/APIImage";
 import DeleteIcon from "../../assets/icons/DeleteIcon";
 import EditIcon from "../../assets/icons/EditIcon";
+import Modal from "../../theme/Modal";
+import ProfessionalForm from "../professional/ProfessionalForm";
 
 
 function MusicPros({
@@ -21,6 +23,10 @@ function MusicPros({
     const { showMessage } = useFeedbackMessage();
 
     const ACCOUNT = LocalStorageTools.readData({ key: "account" });
+
+    const modalCURef = useRef(null);
+    const [modalAction, setModalAction] = useState(APITools.Methods.POST);
+    const [modalObject, setModalObject] = useState({});
     
     const [rows, setRows] = useState([]);
 
@@ -97,12 +103,26 @@ function MusicPros({
                                         { ACCOUNT.admin === 1 &&
                                         <div className="ikRow">
                                             <div className="ikCol50">
-                                                <button className="ikW100 buttonConfirmDelete">
+                                                <button className="ikW100 buttonConfirmDelete"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        setModalAction(APITools.Methods.DELETE);
+                                                        setModalObject(rows[iComponent]);
+                                                        modalCURef.current.setIsOpen(true);
+                                                    }}
+                                                >
                                                     <DeleteIcon width={25} height={25}/>
                                                 </button>
                                             </div>
                                             <div className="ikCol50">
-                                                <button className="ikW100 buttonEdit">
+                                                <button className="ikW100 buttonEdit"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        setModalAction(APITools.Methods.PUT);
+                                                        setModalObject(rows[iComponent]);
+                                                        modalCURef.current.setIsOpen(true);
+                                                    }}
+                                                >
                                                     <EditIcon width={25} height={25}/>
                                                 </button>
                                             </div>
@@ -116,6 +136,16 @@ function MusicPros({
 
                     </div>
                 ))}
+
+                <Modal ref={modalCURef}>
+                    <ProfessionalForm
+                        initRow={modalObject}
+                        action={modalAction}
+                        onSaveDB={() => {
+                            modalCURef.current.setIsOpen(false);
+                        }}
+                    />
+                </Modal>
             </div>
         }
     </>

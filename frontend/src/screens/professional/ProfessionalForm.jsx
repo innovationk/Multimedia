@@ -26,6 +26,13 @@ function ProfessionalForm({
     const [name, set_name] = useState("");
     const [surname, set_surname] = useState("");
 
+    useEffect(() => {
+        if(initRow[`professional.id`]) {
+            set_name(initRow[`professional.name`]);
+            set_surname(initRow[`professional.surname`]);
+        }
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -37,9 +44,13 @@ function ProfessionalForm({
             music: 1,
         };
 
+        let path = `/api/professionals`;
+        if(action === APITools.Methods.PUT || action === APITools.Methods.DELETE) {
+            path += `/${initRow['professional.id']}`
+        }
         const response = await APITools.send({
             method: action,
-            path: `/api/professionals${action === APITools.Methods.PUT ? `/${initRow['professional.id']}` : ""}`,
+            path: path,
             body: inputs
         });
         if (response.apiStatus >= 200 && response.apiStatus < 300) {
@@ -56,7 +67,8 @@ function ProfessionalForm({
             <h2>
                 {firtsLetterUppercase(t('artist'))}
             </h2>
-
+            
+            { (action === APITools.Methods.POST || action === APITools.Methods.PUT) &&
             <form onSubmit={handleSubmit}>
                 <div className="ikMarginT20">
                     <div className="ikMarginB4">
@@ -92,6 +104,23 @@ function ProfessionalForm({
                     </button>
                 </div>
             </form>
+            }
+
+            { action === APITools.Methods.DELETE &&
+                <form onSubmit={handleSubmit}>
+                    <div className="ikMarginT20">
+                        {firtsLetterUppercase(t('ask_confirm_delete'))}
+                    </div>
+                    <div className="ikMarginT20">
+                        {name} {surname}
+                    </div>
+                    <div className="ikMarginT20">
+                        <button type='submit' className='buttonDelete ikW100 ikPaddingV10 ikPaddingH10'>
+                            {firtsLetterUppercase(t('delete'))}
+                        </button>
+                    </div>
+                </form>
+            }
         </>
     )
 }

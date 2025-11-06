@@ -89,6 +89,30 @@ export default class Controller {
         }
     }
 
+    // Can't use "delete" function for obvious reasons
+    static async tagDeleted(req, res, next, callback = (async ({ row }) => { })) {
+        if (Object.keys(req.body).length > 0) {
+            const dbResponse = await MariadbConnector.updateRow({
+                table: this._mainTable,
+                primaryValue: req.params.primaryValue,
+                inputs: {
+                    state: MariadbEnums.States.DELETED
+                }
+            });
+
+            if (dbResponse.hasOwnProperty("error")) {
+                this.sendError({ req: req, res: res, message: "Wrong inputs for this route." });
+            } else {
+                Logger.write(`Controller ${this._mainTable.label} delete: ${req.params.primaryValue} with ${JSON.stringify(req.body)}`);
+                await callback({ row: dbResponse });
+
+                res.status(200).json({});
+            }
+        } else {
+            res.status(204).json({ message: "Nothing to delete." });
+        }
+    }
+
     static async checkAuthorisedAccount(req, res, next, rights = {}) {
         const account = await AccountTools.getAuthorisedAccount({ token_id: req.body.token_id, token: req.body.token, rights: rights });
         if (account.hasOwnProperty('id')) {
