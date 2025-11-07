@@ -88,7 +88,7 @@ export default class FsTools {
         return output;
     }
 
-    static saveBase64ImageSync({ base64Str, dirPath, fileName }) {
+    static saveImageBase64FileSync({ base64Str, dirPath, fileName }) {
         const base64Data = base64Str.replace(/^data:image\/\w+;base64,/, '');
         const outputPath = `${dirPath}/${fileName}`;
         try {

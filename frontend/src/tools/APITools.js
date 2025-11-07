@@ -128,6 +128,17 @@ export default class APITools {
         }
     }
 
+    static fileInputToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                resolve(reader.result);
+            };
+            reader.onerror = (error) => reject(error);
+        });
+    }
+
     static get Protocols() { return Protocols; }
     static get Methods() { return Methods; }
     static get RowsStates() { return RowsStates; }

@@ -13,9 +13,10 @@ export default class AlbumController extends Controller {
             if (req.body.image &&
                 req.body.image.startsWith("data:image")
             ) {
-                FsTools.saveBase64ImageSync({
-                    dirPath: `${PATH_UPLOAD}`,
-                    fileName: `${row.id}.png`,
+                const albumPath = `${PATH_UPLOAD}/${row.id}`;
+                FsTools.saveImageBase64FileSync({
+                    dirPath: `${albumPath}`,
+                    fileName: `cover.png`,
                     base64Str: req.body.image
                 });
             }
@@ -27,9 +28,10 @@ export default class AlbumController extends Controller {
             if (req.body.image &&
                 req.body.image.startsWith("data:image")
             ) {
-                FsTools.saveBase64ImageSync({
-                    dirPath: `${PATH_UPLOAD}`,
-                    fileName: `${req.params.primaryValue}.png`,
+                const albumPath = `${PATH_UPLOAD}/${req.params.primaryValue}`;
+                FsTools.saveImageBase64FileSync({
+                    dirPath: `${albumPath}`,
+                    fileName: `cover.png`,
                     base64Str: req.body.image
                 });
             }
@@ -37,7 +39,7 @@ export default class AlbumController extends Controller {
     }
 
     static async getImage(req, res, next) {
-        const imgPath = `${PATH_UPLOAD}/${req.params.primaryValue}.png`;
+        const imgPath = `${PATH_UPLOAD}/${req.params.primaryValue}/cover.png`;
         if(fs.existsSync(imgPath)) {
             res.sendFile(imgPath);
 

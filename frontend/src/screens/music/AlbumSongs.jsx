@@ -15,6 +15,7 @@ import DeleteIcon from "../../assets/icons/DeleteIcon";
 import EditIcon from "../../assets/icons/EditIcon";
 import Modal from "../../theme/Modal";
 import AlbumForm from "./AlbumForm";
+import SongForm from "./SongForm";
 
 
 function AlbumSongs({
@@ -64,24 +65,62 @@ function AlbumSongs({
 
     return(
     <>
-        {rows.map((row, iRow) => (
-            <div key={iRow} 
-                className="song"
+        { ACCOUNT.admin === 1 &&
+        <div className="ikTextRight ikMarginB40">
+            <button className="button1"
+                onClick={(e) => {
+                    e.preventDefault();
+                    setModalAction(APITools.Methods.POST);
+                    setModalObject({
+                        [`song.album_id`]: albumId
+                    });
+                    modalCURef.current.setIsOpen(true);
+                }}
             >
-                {row[`song.track`]} {row[`song.title`]}
-            </div>
-        ))}
+                <PlusIcon width={25} height={25}/>
+            </button>
+        </div>
+        }
+
+        <table>
+            <tbody>
+                { rows.map((row, iRow) => (
+                    <tr key={iRow} >
+                        <td>
+                            {row[`song.track`]} 
+                        </td>
+                        <td>
+                            {row[`song.title`]}
+                        </td>
+                        { ACCOUNT.admin === 1 &&
+                        <td>
+                            <button className="buttonEdit"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setModalAction(APITools.Methods.PUT);
+                                    setModalObject(row);
+                                    modalCURef.current.setIsOpen(true);
+                                }}
+                            >
+                                <EditIcon width={25} height={25}/>
+                            </button>
+                        </td>
+                        }
+                    </tr>
+                ))}
+            </tbody>
+        </table>
         
 
         <Modal ref={modalCURef}>
-            {/* <AlbumForm
+            <SongForm
                 initRow={modalObject}
                 action={modalAction}
                 onSaveDB={() => {
                     fetchRows();
                     modalCURef.current.setIsOpen(false);
                 }}
-            /> */}
+            />
         </Modal>
     </>
     );

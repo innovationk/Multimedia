@@ -30,5 +30,6 @@
     "song": "chanson",
     "name": "prénom",
     "surname": "nom de famille",
-    "image": "image"
+    "image": "image",
+    "file": "fichier"
 }

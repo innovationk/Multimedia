@@ -30,6 +30,7 @@ const ImageInput = forwardRef(function ImageInput({
             }
             <input
                 type="file"
+                accept="image/png, image/jpeg"
                 onChange={(e) => {
                     const file = e.target.files[0];
                     const reader = new FileReader();
@@ -40,7 +41,6 @@ const ImageInput = forwardRef(function ImageInput({
                     setpreviewimage(URL.createObjectURL(e.target.files[0]));
                 }}
                 style={{ width: "100%" }}
-                accept="image/png, image/jpeg"
             />
             {previewimage.length > 0 &&
                 <img src={previewimage} style={{

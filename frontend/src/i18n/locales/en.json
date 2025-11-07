@@ -30,5 +30,6 @@
     "song": "song",
     "name": "name",
     "surname": "surname",
-    "image": "image"
+    "image": "image",
+    "file": "file"
 }

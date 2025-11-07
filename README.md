@@ -46,3 +46,5 @@ ffmpeg -i input.flac -codec:a libmp3lame -qscale:a 0 output.mp3
 
 -qscale:a 0 sets high quality (adjust between 0–9, where 0 is best).
 ```
+
+// TODO: https://css-tricks.com/making-an-audio-waveform-visualizer-with-vanilla-javascript/

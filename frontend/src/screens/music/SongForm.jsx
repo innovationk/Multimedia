@@ -25,7 +25,7 @@ function SongForm({
 
     const [title, set_title] = useState("");
     const [track, set_track] = useState(0);
-    // const imageInputRef = useRef(null);
+    const [file, setFile] = useState(null);
 
     useEffect(() => {
         if(initRow[`song.id`]) {
@@ -42,31 +42,28 @@ function SongForm({
             path += `/${initRow['song.id']}`;
         }
 
-        let inputs = {
+        let formData = {
             token_id: ACCOUNT.token_id,
             token: ACCOUNT.token,
         };
         if(action === APITools.Methods.POST || action === APITools.Methods.PUT) {
-            if(action === APITools.Methods.POST){
-                inputs.album_id = initRow[`song.album_id`];
+            formData.album_id = initRow[`song.album_id`];
+            formData.title = title;
+            formData.track = track;
+
+            if (file) {
+                formData.audio = await APITools.fileInputToBase64(file);
             }
-
-            inputs.title = title;
-            inputs.track = track;
-
-            // if (!imageInputRef.current.isEmpty()) {
-            //     inputs.image = imageInputRef.current.getValue();
-            // }
         }
 
         const response = await APITools.send({
             method: action,
             path: path,
-            body: inputs
+            body: formData
         });
         if (response.apiStatus >= 200 && response.apiStatus < 300) {
 
-            EventBus.dispatch(AppEvents.Musicsong, {});
+            EventBus.dispatch(AppEvents.MusicSongs, {});
             onSaveDB();
 
         } else {
@@ -86,13 +83,21 @@ function SongForm({
                 <div className="ikMarginT20">
                     <div>
                         <label>
-                            {firtsLetterUppercase(t('title'))} <Mandatory />
+                            {firtsLetterUppercase(t('file'))}
                         </label>
                     </div>
-                    <input type="text" required
-                        value={title}
-                        onChange={(e) => { set_title(e.target.value || ""); }}
-                        placeholder={firtsLetterUppercase(t('title'))}
+                    <input
+                        type="file" required
+                        accept=".mp3"
+                        onChange={(e) => {
+                            setFile(e.target.files[0]);
+
+                            const fileNameElements = e.target.files[0].name.split("-");
+                            if(fileNameElements.length > 1){
+                                set_track(parseInt(fileNameElements.shift()));
+                                set_title(fileNameElements.join("-").replaceAll("_", " ").replaceAll(".mp3", ""));
+                            }
+                        }}
                         className="ikW100"
                     />
                 </div>
@@ -108,15 +113,23 @@ function SongForm({
                         onChange={(e) => { set_track(parseFloat(e.target.value, 10) || 0.00); }}
                         placeholder={firtsLetterUppercase(t('track'))}
                         step={1}
-                        min={0}
+                        min={1}
                         className="ikW100"
                     />
                 </div>
 
                 <div className="ikMarginT20">
-                    {/* <ImageInput ref={imageInputRef}
-                        placeholder={firtsLetterUppercase(t('image'))}
-                    /> */}
+                    <div>
+                        <label>
+                            {firtsLetterUppercase(t('title'))} <Mandatory />
+                        </label>
+                    </div>
+                    <input type="text" required
+                        value={title}
+                        onChange={(e) => { set_title(e.target.value || ""); }}
+                        placeholder={firtsLetterUppercase(t('title'))}
+                        className="ikW100"
+                    />
                 </div>
 
                 <div className="ikMarginT20">
