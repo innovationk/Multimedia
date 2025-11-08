@@ -53,6 +53,12 @@ router
         }),
         (req, res, next) => SongController.update(req, res, next)
     )
+    .delete((req, res, next) => SongController.tagDeleted(req, res, next))
+;
+
+router
+    .route("/songs/:primaryValue/stream")
+    .get((req, res, next) => SongController.stream(req, res, next))
 ;
 
 export default router;

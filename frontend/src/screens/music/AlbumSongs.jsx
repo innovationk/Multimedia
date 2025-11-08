@@ -16,6 +16,7 @@ import EditIcon from "../../assets/icons/EditIcon";
 import Modal from "../../theme/Modal";
 import AlbumForm from "./AlbumForm";
 import SongForm from "./SongForm";
+import SongPlayer from "./SongPlayer";
 
 
 function AlbumSongs({
@@ -92,8 +93,21 @@ function AlbumSongs({
                         <td>
                             {row[`song.title`]}
                         </td>
+                        <td>
+                            <SongPlayer path={`/api/songs/${row[`song.id`]}/stream`}/>
+                        </td>
                         { ACCOUNT.admin === 1 &&
                         <td>
+                            <button className="buttonConfirmDelete"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setModalAction(APITools.Methods.DELETE);
+                                    setModalObject(row);
+                                    modalCURef.current.setIsOpen(true);
+                                }}
+                            >
+                                <DeleteIcon width={25} height={25}/>
+                            </button>
                             <button className="buttonEdit"
                                 onClick={(e) => {
                                     e.preventDefault();

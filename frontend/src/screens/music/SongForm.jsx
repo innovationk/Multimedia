@@ -83,7 +83,7 @@ function SongForm({
                 <div className="ikMarginT20">
                     <div>
                         <label>
-                            {firtsLetterUppercase(t('file'))}
+                            {firtsLetterUppercase(t('file'))} <Mandatory />
                         </label>
                     </div>
                     <input
@@ -105,7 +105,7 @@ function SongForm({
                 <div className="ikMarginT20">
                     <div>
                         <label>
-                            {firtsLetterUppercase(t('track'))}
+                            {firtsLetterUppercase(t('track'))} <Mandatory />
                         </label>
                     </div>
                     <input type="number" required
@@ -146,7 +146,7 @@ function SongForm({
                         {firtsLetterUppercase(t('ask_confirm_delete'))}
                     </div>
                     <div className="ikMarginT20">
-                        {title}
+                        {track} - {title}
                     </div>
                     <div className="ikMarginT20">
                         <button type='submit' className='buttonDelete ikW100 ikPaddingV10 ikPaddingH10'>

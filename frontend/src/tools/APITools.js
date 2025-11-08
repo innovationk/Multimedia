@@ -51,6 +51,7 @@ export default class APITools {
             options.body = JSON.stringify(body);
         }
 
+        document.body.style.cursor='wait';
         try {
             const response = await fetch(uri, options);
             if (response.ok) {
@@ -62,6 +63,7 @@ export default class APITools {
             console.error(`${method} request failed:`, error);
             throw error;
         }
+        document.body.style.cursor='default';
 
         return output;
     }
@@ -71,7 +73,7 @@ export default class APITools {
         return query ? `?${query}` : '';
     }
 
-    static async fetchImage({
+    static async fetchMedia({
         protocol = DEFAULT_PROTOCOL, host = DEFAULT_HOST, port = DEFAULT_PORT,
         path = '', query = {}
     }) {
@@ -81,21 +83,20 @@ export default class APITools {
 
         try {
             const response = await fetch(uri);
-            const imageBlob = await response.blob();
+            const responseBlob = await response.blob();
             // /.../imageOK Blob { size: 27, type: "application/json; charset=utf-8" }
             // /.../imageKO Blob { size: 618993, type: "image/png" 
-            if (imageBlob.type.includes("image")) {
-                output.image = URL.createObjectURL(imageBlob);
+            if (responseBlob.type.includes("image") || responseBlob.type.includes("audio")) {
+                output.mediaURL = URL.createObjectURL(responseBlob);
             }
             // else {
-            //     console.error('Image not found', url);
+            //     console.error('Media not found', url);
             // }
 
         } catch (error) {
             console.error(`${Methods.GET} request failed:`, error);
             throw error;
         }
-
 
         return output;
     }
