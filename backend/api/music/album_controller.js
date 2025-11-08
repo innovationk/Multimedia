@@ -14,7 +14,7 @@ export default class AlbumController extends Controller {
                 req.body.image.startsWith("data:image")
             ) {
                 const albumPath = `${PATH_UPLOAD}/${row.id}`;
-                FsTools.saveImageBase64FileSync({
+                FsTools.saveBase64ImageSync({
                     dirPath: `${albumPath}`,
                     fileName: `cover.png`,
                     base64Str: req.body.image
@@ -29,7 +29,7 @@ export default class AlbumController extends Controller {
                 req.body.image.startsWith("data:image")
             ) {
                 const albumPath = `${PATH_UPLOAD}/${req.params.primaryValue}`;
-                FsTools.saveImageBase64FileSync({
+                FsTools.saveBase64ImageSync({
                     dirPath: `${albumPath}`,
                     fileName: `cover.png`,
                     base64Str: req.body.image

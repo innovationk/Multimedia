@@ -23,8 +23,8 @@ export default class SongController extends Controller {
             if(req.body.audio) {
                 const song = await MariadbConnector.readRow({
                     table: this._mainTable,
-                    primaryValue: req.params.primaryValue,
                     primaryField: this._mainTable.primaryKey,
+                    primaryValue: req.params.primaryValue,
                 });
 
                 const albumPath = `${PATH_UPLOAD}/${song.album_id}`;
