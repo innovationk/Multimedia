@@ -32,5 +32,6 @@
     "surname": "nom de famille",
     "image": "image",
     "file": "fichier",
+    "books": "livres",
     "videos": "videos"
 }
