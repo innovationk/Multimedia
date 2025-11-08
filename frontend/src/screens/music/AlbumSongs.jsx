@@ -9,12 +9,11 @@ import AppEvents from '../../theme/AppEvents';
 import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
 import APIImage from "../../tools/APIImage";
-import ArrowLeftIcon from "../../assets/icons/ArrowLeftIcon";
+import APIDownloadButton from "../../tools/APIDownloadButton";
 import PlusIcon from "../../assets/icons/PlusIcon";
 import DeleteIcon from "../../assets/icons/DeleteIcon";
 import EditIcon from "../../assets/icons/EditIcon";
 import Modal from "../../theme/Modal";
-import AlbumForm from "./AlbumForm";
 import SongForm from "./SongForm";
 import SongPlayer from "./SongPlayer";
 
@@ -65,7 +64,7 @@ function AlbumSongs({
 
 
     return(
-    <>
+    <div className="albumSongs">
         { ACCOUNT.admin === 1 &&
         <div className="ikTextRight ikMarginB40">
             <button className="button1"
@@ -88,7 +87,7 @@ function AlbumSongs({
                 { rows.map((row, iRow) => (
                     <tr key={iRow} >
                         <td>
-                            {row[`song.track`]} 
+                            {row[`song.track`]}
                         </td>
                         <td>
                             {row[`song.title`]}
@@ -96,30 +95,36 @@ function AlbumSongs({
                         <td>
                             <SongPlayer path={`/api/songs/${row[`song.id`]}/stream`}/>
                         </td>
-                        { ACCOUNT.admin === 1 &&
                         <td>
-                            <button className="buttonConfirmDelete"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setModalAction(APITools.Methods.DELETE);
-                                    setModalObject(row);
-                                    modalCURef.current.setIsOpen(true);
-                                }}
-                            >
-                                <DeleteIcon width={25} height={25}/>
-                            </button>
-                            <button className="buttonEdit"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setModalAction(APITools.Methods.PUT);
-                                    setModalObject(row);
-                                    modalCURef.current.setIsOpen(true);
-                                }}
-                            >
-                                <EditIcon width={25} height={25}/>
-                            </button>
+                            <APIDownloadButton downloadUrl={`${APITools.getURL({})}/api/songs/${row[`song.id`]}/download`}
+                                title={`${row[`song.track`]}-${row[`song.title`]}`}
+                                extension="mp3"
+                            />
+                            { ACCOUNT.admin === 1 &&
+                            <>
+                                <button className="buttonConfirmDelete"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setModalAction(APITools.Methods.DELETE);
+                                        setModalObject(row);
+                                        modalCURef.current.setIsOpen(true);
+                                    }}
+                                >
+                                    <DeleteIcon width={25} height={25}/>
+                                </button>
+                                <button className="buttonEdit"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setModalAction(APITools.Methods.PUT);
+                                        setModalObject(row);
+                                        modalCURef.current.setIsOpen(true);
+                                    }}
+                                >
+                                    <EditIcon width={25} height={25}/>
+                                </button>
+                            </>
+                            }
                         </td>
-                        }
                     </tr>
                 ))}
             </tbody>
@@ -136,7 +141,7 @@ function AlbumSongs({
                 }}
             />
         </Modal>
-    </>
+    </div>
     );
 }
 export default AlbumSongs;

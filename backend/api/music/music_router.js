@@ -61,4 +61,9 @@ router
     .get((req, res, next) => SongController.stream(req, res, next))
 ;
 
+router
+    .route("/songs/:primaryValue/download")
+    .get((req, res, next) => SongController.download(req, res, next))
+;
+
 export default router;

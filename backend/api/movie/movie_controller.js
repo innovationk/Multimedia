@@ -31,8 +31,8 @@ export default class MovieController extends Controller {
 
             } else {
                 res.writeHead(200, {
-                'Content-Length': videoSize,
-                'Content-Type': 'video/mp4',
+                    'Content-Length': videoSize,
+                    'Content-Type': 'video/mp4',
                 });
                 fs.createReadStream(videoPath).pipe(res);
             }
@@ -61,29 +61,29 @@ export default class MovieController extends Controller {
                 const chunkSize = end - start + 1;
 
                 res.writeHead(206, {
-                'Content-Range': `bytes ${start}-${end}/${fileSize}`,
-                'Content-Length': chunkSize,
+                    'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+                    'Content-Length': chunkSize,
                 });
 
                 const fileStream = fs.createReadStream(videoPath, { start, end });
                 fileStream.pipe(res);
 
                 fileStream.on('error', (err) => {
-                console.error('Error streaming file:', err);
-                res.status(500).send('Error streaming file');
+                    console.error('Error streaming file:', err);
+                    res.status(500).send('Error streaming file');
                 });
             } else {
                 // No range request, send the entire file
                 res.writeHead(200, {
-                'Content-Length': fileSize,
+                    'Content-Length': fileSize,
                 });
 
                 const fileStream = fs.createReadStream(videoPath);
                 fileStream.pipe(res);
 
                 fileStream.on('error', (err) => {
-                console.error('Error streaming file:', err);
-                res.status(500).send('Error streaming file');
+                    console.error('Error streaming file:', err);
+                    res.status(500).send('Error streaming file');
                 });
             }
 

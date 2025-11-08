@@ -8,7 +8,6 @@ import EventBus from '../../tools/EventBus';
 import AppEvents from '../../theme/AppEvents';
 import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
-import DownloadButton from "./DownloadButton";
 
 
 function MoviesScreen() {
@@ -59,8 +58,9 @@ function MoviesScreen() {
                         </NavLink>
                     </div>
                     {/* <div className="ikCol">
-                        <DownloadButton downloadUrl={`${APITools.getURL({})}/api/movies/${row[`movie.id`]}/download`}
+                        <APIDownloadButton downloadUrl={`${APITools.getURL({})}/api/movies/${row[`movie.id`]}/download`}
                             title={generateSlug(row[`movie.title`])}
+                            extension="mp4"
                         />
                     </div> */}
                 </div>

@@ -76,4 +76,31 @@ export default class SongController extends Controller {
 
         await super.tagDeleted(req, res, next, async ({ row }) => {});
     }
+
+    static async download(req, res, next) {
+        const song = await MariadbConnector.readRow({
+            table: this._mainTable,
+            primaryField: this._mainTable.primaryKey,
+            primaryValue: req.params.primaryValue,
+        });
+        const albumPath = `${PATH_UPLOAD}/${song['song.album_id']}`;
+        const filePath = `${albumPath}/${song['song.track']}.mp3`;
+
+        if(fs.existsSync(filePath)) {
+            const fileSize = fs.statSync(filePath).size;
+            res.writeHead(200, {
+                'Content-Length': fileSize,
+            });
+
+            const fileStream = fs.createReadStream(filePath);
+            fileStream.pipe(res);
+
+            fileStream.on('error', (err) => {
+                console.error('Error streaming file:', err);
+                res.status(500).send('Error streaming file');
+            });
+        } else {
+            res.status(400).send('File not found');
+        }
+    }
 }
