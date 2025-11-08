@@ -1,8 +1,8 @@
 import MariadbEnums from "../../tools/mariadb/mariadb_enums.js";
 import MariadbTable from "../../tools/mariadb/mariadb_table.js";
 
-export default class MovieTable extends MariadbTable {
-    static _label = `movie`;
+export default class VideoTable extends MariadbTable {
+    static _label = `video`;
 
     static _schema = {
         id: { dataType: MariadbEnums.DataTypes.BIGINT_UNSIGNED, nullable: false, unique: true, autoIncrement: true },

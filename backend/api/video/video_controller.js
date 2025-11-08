@@ -1,11 +1,11 @@
 import Controller from '../controller.js';
-import MovieTable from "./movie_table.js";
+import VideoTable from "./video_table.js";
 import fs from 'node:fs';
 
 const PATH_UPLOAD = `${process.cwd()}/uploads/movies`;
 
-export default class MovieController extends Controller {
-    static _mainTable = MovieTable;
+export default class VideoController extends Controller {
+    static _mainTable = VideoTable;
 
     static async stream(req, res, next) {
         const videoPath = `${PATH_UPLOAD}/${req.params.primaryValue}.mp4`;

@@ -10,12 +10,12 @@ import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
 
 
-function ExternalMovieScreen() {
+function ExternalVideoScreen() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const { showMessage } = useFeedbackMessage();
 
-    const { movieId } = useParams();
+    const { videoId } = useParams();
 
     const [row, setRow] = useState({});
     const videoRef = useRef(null);
@@ -29,7 +29,7 @@ function ExternalMovieScreen() {
 
         const response = await APITools.send({
             method: APITools.Methods.GET,
-            path: `/api/movies/${movieId}`
+            path: `/api/videos/${videoId}`
         });
         if (response.apiStatus === 200) {
             _row = response.row;
@@ -40,7 +40,7 @@ function ExternalMovieScreen() {
 
     useEffect(() => {
         if (videoRef.current) {
-            videoRef.current.src = `${APITools.getURL({})}/api/movies/${movieId}/stream`;
+            videoRef.current.src = `${APITools.getURL({})}/api/videos/${videoId}/stream`;
             videoRef.current.load();
         }
     }, [videoRef]);
@@ -49,7 +49,7 @@ function ExternalMovieScreen() {
     return(
     <>
         <h1 className="ikTextCenter">
-            {row[`movie.title`]} ({row[`movie.language`]})
+            {row[`video.title`]} ({row[`video.language`]})
         </h1>
 
         <video
@@ -61,4 +61,4 @@ function ExternalMovieScreen() {
     </>
     );
 }
-export default ExternalMovieScreen;
+export default ExternalVideoScreen;

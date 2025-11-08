@@ -12,12 +12,12 @@ import CssTools from "../../tools/CssTools";
 /*
 * Because the server's host blocks video streaming
 */
-function LocalMovieScreen() {
+function LocalVideoScreen() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const { showMessage } = useFeedbackMessage();
 
-    const { movieId } = useParams();
+    const { videoId } = useParams();
 
     const [row, setRow] = useState({});
     const [videoSrc, setVideoSrc] = useState(null);
@@ -31,12 +31,12 @@ function LocalMovieScreen() {
 
         const response = await APITools.send({
             method: APITools.Methods.GET,
-            path: `/api/movies/${movieId}`
+            path: `/api/videos/${videoId}`
         });
         if (response.apiStatus === 200) {
             _row = response.row;
 
-            import(`../../assets/movies/${_row[`movie.id`]}.mp4`)
+            import(`../../assets/videos/${_row[`video.id`]}.mp4`)
                 .then((src) => {
                     setVideoSrc(src.default);
                 })
@@ -52,9 +52,9 @@ function LocalMovieScreen() {
     return(
     <>
         <h1 className="ikTextCenter">
-            {row[`movie.title`]} 
-            { row[`movie.language`] !== APITools.Languages.NONE &&
-                <>({row[`movie.language`]})</>
+            {row[`video.title`]} 
+            { row[`video.language`] !== APITools.Languages.NONE &&
+                <>({row[`video.language`]})</>
             }
         </h1>
 
@@ -66,4 +66,4 @@ function LocalMovieScreen() {
     </>
     );
 }
-export default LocalMovieScreen;
+export default LocalVideoScreen;

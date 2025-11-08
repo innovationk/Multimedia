@@ -8,9 +8,9 @@ import MainStructure from './theme/MainStructure';
 import LoginScreen from './screens/account/LoginScreen';
 import LogoutScreen from './screens/account/LogoutScreen';
 import HomeScreen from './screens/home/HomeScreen';
-import MoviesScreen from './screens/movie/MoviesScreen';
+import VideosScreen from './screens/video/VideosScreen';
 // import ExternalMovieScreen from './screens/movie/ExternalMovieScreen';
-import LocalMovieScreen from './screens/movie/LocalMovieScreen';
+import LocalMovieScreen from './screens/video/LocalMovieScreen';
 import MusicScreen from './screens/music/MusicScreen';
 import ProAlbums from './screens/music/ProAlbums';
 
@@ -96,10 +96,10 @@ function App() {
                     </MainStructure>
                 } />
 
-                <Route path={`/movies`} element={
+                <Route path={`/videos`} element={
                     <MainStructure>
                         <ProtectedRoute>
-                            <MoviesScreen />
+                            <VideosScreen />
                         </ProtectedRoute>
                     </MainStructure>
                 } />

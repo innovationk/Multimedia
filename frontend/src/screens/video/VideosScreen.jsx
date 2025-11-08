@@ -10,7 +10,7 @@ import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
 
 
-function MoviesScreen() {
+function VideosScreen() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const { showMessage } = useFeedbackMessage();
@@ -26,9 +26,9 @@ function MoviesScreen() {
 
         const response = await APITools.send({
             method: APITools.Methods.GET,
-            path: `/api/movies`,
+            path: `/api/videos`,
             query: {
-                sort: 'movie.title_ASC',
+                sort: 'video.title_ASC',
                 elements_per_page: 20
             }
         });
@@ -43,23 +43,23 @@ function MoviesScreen() {
     return(
     <>
         <h1 className="ikTextCenter">
-            {firtsLetterUppercase(t('movies'))}
+            {firtsLetterUppercase(t('videos'))}
         </h1>
 
         <div className="ikMarginT20">
             {rows.map((row, index) => (
                 <div key={`row_${index}`} className="ikRow">
                     <div className="ikCol">
-                        <NavLink to={`/movies/${row[`movie.id`]}`}>
-                            {row[`movie.title`]} 
-                            { row[`movie.language`] !== APITools.Languages.NONE &&
-                                <>({row[`movie.language`]})</>
+                        <NavLink to={`/videos/${row[`video.id`]}`}>
+                            {row[`video.title`]} 
+                            { row[`video.language`] !== APITools.Languages.NONE &&
+                                <>({row[`video.language`]})</>
                             }
                         </NavLink>
                     </div>
                     {/* <div className="ikCol">
-                        <APIDownloadButton downloadUrl={`${APITools.getURL({})}/api/movies/${row[`movie.id`]}/download`}
-                            title={generateSlug(row[`movie.title`])}
+                        <APIDownloadButton downloadUrl={`${APITools.getURL({})}/api/videos/${row[`video.id`]}/download`}
+                            title={generateSlug(row[`video.title`])}
                             extension="mp4"
                         />
                     </div> */}
@@ -69,4 +69,4 @@ function MoviesScreen() {
     </>
     );
 }
-export default MoviesScreen;
+export default VideosScreen;

@@ -42,7 +42,9 @@ function APIImage({
     const fetchImage = async () => {
         if (path.length > 0) {
             const response = await APITools.fetchMedia({ path: path, query: query });
-            setImageData(response.mediaURL);
+            if(response.hasOwnProperty("mediaURL")) {
+                setImageData(response.mediaURL);
+            }
         }
     };
 
