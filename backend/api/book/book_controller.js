@@ -64,8 +64,8 @@ export default class BookController extends Controller {
             primaryField: this._mainTable.primaryKey,
             primaryValue: req.params.primaryValue,
         });
-        const albumPath = `${PATH_UPLOAD}`;
-        const filePath = `${albumPath}/${book['book.id']}.epub`;
+        const dirPath = `${PATH_UPLOAD}`;
+        const filePath = `${dirPath}/${book['book.id']}.epub`;
 
         if(fs.existsSync(filePath)) {
             const fileSize = fs.statSync(filePath).size;

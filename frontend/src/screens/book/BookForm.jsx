@@ -93,10 +93,7 @@ function BookForm({
                         onChange={(e) => {
                             setFile(e.target.files[0]);
 
-                            const fileNameElements = e.target.files[0].name.split("-");
-                            if(fileNameElements.length > 1){
-                                set_title(fileNameElements.join("-").replaceAll("_", " ").replaceAll(".epub", ""));
-                            }
+                            set_title(e.target.files[0].name.replaceAll("_", " ").replaceAll(".epub", ""));
                         }}
                         className="ikW100"
                     />

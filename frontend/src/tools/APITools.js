@@ -134,7 +134,9 @@ export default class APITools {
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = () => {
-                resolve(reader.result);
+                // resolve(reader.result);
+                const result = reader.result.split(',')[1];
+                resolve(result);
             };
             reader.onerror = (error) => reject(error);
         });
