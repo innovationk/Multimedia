@@ -88,6 +88,7 @@ function BooksScreen() {
                         <APIDownloadButton downloadUrl={`${APITools.getURL({})}/api/books/${row[`book.id`]}/download`}
                             title={generateSlug(row[`book.title`])}
                             extension="epub"
+                            classNames="button1"
                         />
                         { ACCOUNT.admin === 1 &&
                         <>
