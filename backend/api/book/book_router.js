@@ -27,4 +27,9 @@ router
     .delete((req, res, next) => BookController.tagDeleted(req, res, next))
 ;
 
+router
+    .route("/books/:primaryValue/download")
+    .get((req, res, next) => BookController.download(req, res, next))
+;
+
 export default router;

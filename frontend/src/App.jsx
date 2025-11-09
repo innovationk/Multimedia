@@ -13,6 +13,7 @@ import VideosScreen from './screens/video/VideosScreen';
 import LocalMovieScreen from './screens/video/LocalMovieScreen';
 import MusicScreen from './screens/music/MusicScreen';
 import ProAlbums from './screens/music/ProAlbums';
+import BooksScreen from './screens/book/BooksScreen';
 
 const ProtectedRoute = ({ children }) => {
     const [authState, setAuthState] = useState(0);
@@ -77,6 +78,14 @@ function App() {
                     <MainStructure>
                         <ProtectedRoute>
                             <HomeScreen />
+                        </ProtectedRoute>
+                    </MainStructure>
+                } />
+
+                <Route path={`/books`} element={
+                    <MainStructure>
+                        <ProtectedRoute>
+                            <BooksScreen />
                         </ProtectedRoute>
                     </MainStructure>
                 } />
