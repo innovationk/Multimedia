@@ -9,6 +9,11 @@ import AppEvents from '../../theme/AppEvents';
 import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
 import APIDownloadButton from "../../tools/APIDownloadButton";
+import PlusIcon from "../../assets/icons/PlusIcon";
+import DeleteIcon from "../../assets/icons/DeleteIcon";
+import EditIcon from "../../assets/icons/EditIcon";
+import Modal from "../../theme/Modal";
+import BookForm from "./BookForm";
 
 
 function BooksScreen() {
@@ -16,7 +21,13 @@ function BooksScreen() {
     const navigate = useNavigate();
     const { showMessage } = useFeedbackMessage();
 
+    const ACCOUNT = LocalStorageTools.readData({ key: "account" });
+
     const [rows, setRows] = useState([]);
+
+    const modalCURef = useRef(null);
+    const [modalAction, setModalAction] = useState(APITools.Methods.POST);
+    const [modalObject, setModalObject] = useState({});
 
     useEffect(() => {
         fetchRows();
@@ -41,12 +52,26 @@ function BooksScreen() {
     };
 
 
-    console.log(rows)
     return(
     <>
         <h1 className="ikTextCenter">
             {firtsLetterUppercase(t('books'))}
         </h1>
+
+        { ACCOUNT.admin === 1 &&
+        <div className="ikTextRight ikMarginB40">
+            <button className="button1"
+                onClick={(e) => {
+                    e.preventDefault();
+                    setModalAction(APITools.Methods.POST);
+                    setModalObject({});
+                    modalCURef.current.setIsOpen(true);
+                }}
+            >
+                <PlusIcon width={25} height={25}/>
+            </button>
+        </div>
+        }
 
         <div className="ikMarginT20">
             {rows.map((row, index) => (
@@ -64,10 +89,45 @@ function BooksScreen() {
                             title={generateSlug(row[`book.title`])}
                             extension="epub"
                         />
+                        { ACCOUNT.admin === 1 &&
+                        <>
+                            <button className="buttonConfirmDelete"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setModalAction(APITools.Methods.DELETE);
+                                    setModalObject(row);
+                                    modalCURef.current.setIsOpen(true);
+                                }}
+                            >
+                                <DeleteIcon width={25} height={25}/>
+                            </button>
+                            <button className="buttonEdit"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setModalAction(APITools.Methods.PUT);
+                                    setModalObject(row);
+                                    modalCURef.current.setIsOpen(true);
+                                }}
+                            >
+                                <EditIcon width={25} height={25}/>
+                            </button>
+                        </>
+                        }
                     </div>
                 </div>
             ))}
         </div>
+
+        <Modal ref={modalCURef}>
+            <BookForm 
+                initRow={modalObject}
+                action={modalAction}
+                onSaveDB={() => {
+                    fetchRows();
+                    modalCURef.current.setIsOpen(false);
+                }}
+            />
+        </Modal>
     </>
     );
 }
