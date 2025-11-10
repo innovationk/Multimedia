@@ -55,6 +55,16 @@
 .ikRound16 { border-radius: 16px; }
 .ikRound20 { border-radius: 20px; }
 
+.ikTableWrapper {
+    overflow-x: auto;
+    display: block;
+    padding-bottom: 10px;
+}
+.ikTableWrapper table {
+    border-spacing: 0;
+    width: 100%;
+}
+
 .ikMarginT8 { margin-top: 4px; }
 .ikMarginB4 { margin-bottom: 4px; }
 .ikMarginL4 { margin-left: 4px; }

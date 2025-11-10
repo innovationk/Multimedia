@@ -82,55 +82,56 @@ function AlbumSongs({
         </div>
         }
 
-        <table>
-            <tbody>
-                { rows.map((row, iRow) => (
-                    <tr key={iRow} >
-                        <td>
-                            {row[`song.track`]}
-                        </td>
-                        <td>
-                            {row[`song.title`]}
-                        </td>
-                        <td>
-                            <SongPlayer path={`/api/songs/${row[`song.id`]}/stream`}/>
-                        </td>
-                        <td>
-                            <APIDownloadButton downloadUrl={`${APITools.getURL({})}/api/songs/${row[`song.id`]}/download`}
-                                title={`${row[`song.track`]}-${row[`song.title`]}`}
-                                extension="mp3"
-                                classNames="button1"
-                            />
-                            { ACCOUNT.admin === 1 &&
-                            <>
-                                <button className="buttonConfirmDelete"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setModalAction(APITools.Methods.DELETE);
-                                        setModalObject(row);
-                                        modalCURef.current.setIsOpen(true);
-                                    }}
-                                >
-                                    <DeleteIcon width={25} height={25}/>
-                                </button>
-                                <button className="buttonEdit"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setModalAction(APITools.Methods.PUT);
-                                        setModalObject(row);
-                                        modalCURef.current.setIsOpen(true);
-                                    }}
-                                >
-                                    <EditIcon width={25} height={25}/>
-                                </button>
-                            </>
-                            }
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
-        
+        <div className="ikTableWrapper">
+            <table>
+                <tbody>
+                    { rows.map((row, iRow) => (
+                        <tr key={iRow} >
+                            <td>
+                                {row[`song.track`]}
+                            </td>
+                            <td>
+                                {row[`song.title`]}
+                            </td>
+                            <td>
+                                <SongPlayer path={`/api/songs/${row[`song.id`]}/stream`}/>
+                            </td>
+                            <td>
+                                <APIDownloadButton downloadUrl={`${APITools.getURL({})}/api/songs/${row[`song.id`]}/download`}
+                                    title={`${row[`song.track`]}-${row[`song.title`]}`}
+                                    extension="mp3"
+                                    classNames="button1"
+                                />
+                                { ACCOUNT.admin === 1 &&
+                                <>
+                                    <button className="buttonConfirmDelete"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setModalAction(APITools.Methods.DELETE);
+                                            setModalObject(row);
+                                            modalCURef.current.setIsOpen(true);
+                                        }}
+                                    >
+                                        <DeleteIcon width={25} height={25}/>
+                                    </button>
+                                    <button className="buttonEdit"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setModalAction(APITools.Methods.PUT);
+                                            setModalObject(row);
+                                            modalCURef.current.setIsOpen(true);
+                                        }}
+                                    >
+                                        <EditIcon width={25} height={25}/>
+                                    </button>
+                                </>
+                                }
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
 
         <Modal ref={modalCURef}>
             <SongForm
