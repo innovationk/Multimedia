@@ -112,7 +112,7 @@ function App() {
                         </ProtectedRoute>
                     </MainStructure>
                 } />
-                <Route path={`/movies/:movieId`} element={
+                <Route path={`/videos/:videoId`} element={
                     <MainStructure>
                         <ProtectedRoute>
                             {/* <ExternalMovieScreen /> */}
