@@ -34,7 +34,7 @@ function MainHeader() {
             let _links = [
                 { label: "home", url: "/home" },
                 { label: "books", url: "/books" },
-                // { label: "music", url: "/music" },
+                { label: "music", url: "/music" },
                 { label: "videos", url: "/videos" },
                 { label: "logout", url: "/logout" }
             ];
