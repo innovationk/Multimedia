@@ -99,6 +99,7 @@ function AlbumSongs({
                             <APIDownloadButton downloadUrl={`${APITools.getURL({})}/api/songs/${row[`song.id`]}/download`}
                                 title={`${row[`song.track`]}-${row[`song.title`]}`}
                                 extension="mp3"
+                                classNames="button1"
                             />
                             { ACCOUNT.admin === 1 &&
                             <>

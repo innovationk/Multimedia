@@ -61,6 +61,7 @@ function VideosScreen() {
                         <APIDownloadButton downloadUrl={`${APITools.getURL({})}/api/videos/${row[`video.id`]}/download`}
                             title={generateSlug(row[`video.title`])}
                             extension="mp4"
+                            classNames="button1"
                         />
                     </div> */}
                 </div>

@@ -92,10 +92,13 @@ function SongForm({
                         onChange={(e) => {
                             setFile(e.target.files[0]);
 
-                            const fileNameElements = e.target.files[0].name.split("-");
+                            const fileName = e.target.files[0].name;
+                            const fileNameElements = fileName.split("-");
                             if(fileNameElements.length > 1){
                                 set_track(parseInt(fileNameElements.shift()));
                                 set_title(fileNameElements.join("-").replaceAll("_", " ").replaceAll(".mp3", ""));
+                            } else {
+                                set_title(fileName.replaceAll("_", " ").replaceAll(".mp3", ""));
                             }
                         }}
                         className="ikW100"
