@@ -37,7 +37,7 @@ CREATE TABLE `account` (
   `admin` tinyint(1) DEFAULT 0,
   `updated` bigint(20) UNSIGNED NOT NULL,
   `created` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `account`
@@ -62,7 +62,7 @@ CREATE TABLE `album` (
   `year` int(10) UNSIGNED DEFAULT 0,
   `updated` bigint(20) UNSIGNED NOT NULL,
   `created` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `album`
@@ -86,7 +86,7 @@ CREATE TABLE `book` (
   `title` varchar(512) NOT NULL,
   `updated` bigint(20) UNSIGNED NOT NULL,
   `created` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `book`
@@ -155,7 +155,7 @@ CREATE TABLE `professional` (
   `movie` tinyint(1) DEFAULT 0,
   `updated` bigint(20) UNSIGNED NOT NULL,
   `created` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `professional`
@@ -179,7 +179,7 @@ CREATE TABLE `song` (
   `track` tinyint(3) UNSIGNED DEFAULT 0,
   `updated` bigint(20) UNSIGNED NOT NULL,
   `created` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `song`
@@ -225,7 +225,7 @@ CREATE TABLE `video` (
   `title` varchar(512) NOT NULL,
   `updated` bigint(20) UNSIGNED NOT NULL,
   `created` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `video`
