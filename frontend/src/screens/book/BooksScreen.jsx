@@ -118,67 +118,67 @@ function BooksScreen() {
         </div> */}
 
         <div className="ikTableWrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th className="ikPaddingV10">
-                        {firtsLetterUppercase(t(`title`))}
-                    </th>
-                    <th>
-                        {firtsLetterUppercase(t(`language`))}
-                    </th>
-                    <th>
-                        {firtsLetterUppercase(t(`actions`))}
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                {rows.map((row, index) => (
-                    <tr key={`row_${index}`}>
-                        <td className="ikTextCenter ikPaddingV10">
-                            {row[`book.title`]} 
-                        </td>
-                        <td className="ikTextCenter">
-                            { row[`book.language`] !== APITools.Languages.NONE &&
-                                <> {(row[`book.language`] || "").toUpperCase()}</>
-                            }
-                        </td>
-                        <td className="ikTextCenter">
-                            <APIDownloadButton downloadUrl={`${APITools.getURL({})}/api/books/${row[`book.id`]}/download`}
-                                title={generateSlug(row[`book.title`])}
-                                extension="epub"
-                                classNames="button1"
-                            />
-                            { ACCOUNT.admin === 1 &&
-                            <>
-                                <button className="buttonConfirmDelete"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setModalAction(APITools.Methods.DELETE);
-                                        setModalObject(row);
-                                        modalCURef.current.setIsOpen(true);
-                                    }}
-                                >
-                                    <DeleteIcon width={25} height={25}/>
-                                </button>
-                                <button className="buttonEdit"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setModalAction(APITools.Methods.PUT);
-                                        setModalObject(row);
-                                        modalCURef.current.setIsOpen(true);
-                                    }}
-                                >
-                                    <EditIcon width={25} height={25}/>
-                                </button>
-                            </>
-                            }
-                        </td>
+            <table>
+                <thead>
+                    <tr>
+                        <th className="ikPaddingV10">
+                            {firtsLetterUppercase(t(`title`))}
+                        </th>
+                        <th>
+                            {firtsLetterUppercase(t(`language`))}
+                        </th>
+                        <th>
+                            {firtsLetterUppercase(t(`actions`))}
+                        </th>
                     </tr>
-                ))}
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    {rows.map((row, index) => (
+                        <tr key={`row_${index}`}>
+                            <td className="ikTextCenter ikPaddingV10">
+                                {row[`book.title`]} 
+                            </td>
+                            <td className="ikTextCenter">
+                                { row[`book.language`] !== APITools.Languages.NONE &&
+                                    <> {(row[`book.language`] || "").toUpperCase()}</>
+                                }
+                            </td>
+                            <td className="ikTextCenter">
+                                <APIDownloadButton downloadUrl={`${APITools.getURL({})}/api/books/${row[`book.id`]}/download`}
+                                    title={generateSlug(row[`book.title`])}
+                                    extension="epub"
+                                    classNames="button1"
+                                />
+                                { ACCOUNT.admin === 1 &&
+                                <>
+                                    <button className="buttonConfirmDelete"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setModalAction(APITools.Methods.DELETE);
+                                            setModalObject(row);
+                                            modalCURef.current.setIsOpen(true);
+                                        }}
+                                    >
+                                        <DeleteIcon width={25} height={25}/>
+                                    </button>
+                                    <button className="buttonEdit"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setModalAction(APITools.Methods.PUT);
+                                            setModalObject(row);
+                                            modalCURef.current.setIsOpen(true);
+                                        }}
+                                    >
+                                        <EditIcon width={25} height={25}/>
+                                    </button>
+                                </>
+                                }
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
 
         <Modal ref={modalCURef}>
             <BookForm 

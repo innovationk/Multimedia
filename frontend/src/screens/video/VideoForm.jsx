@@ -10,10 +10,9 @@ import LocalStorageTools from "../../tools/LocalStorageTools";
 import CssTools from "../../tools/CssTools";
 import Mandatory from "../../tools/Mandatory";
 import AppEvents from "../../theme/AppEvents";
-import BookEnums from "./BookEnums";
 
 
-function BookForm({
+function VideoForm({
     initRow = {},
     action = APITools.Methods.POST,
     onSaveDB = (() => { }),
@@ -24,25 +23,22 @@ function BookForm({
 
     const ACCOUNT = LocalStorageTools.readData({ key: "account" });
 
-    const [category, set_category] = useState(BookEnums.Categories.NOVEL);
     const [title, set_title] = useState("");
     const [language, set_language] = useState("");
-    const [file, setFile] = useState(null);
 
     useEffect(() => {
-        if(initRow[`book.id`]) {
-            set_category(initRow[`book.category`]);
-            set_title(initRow[`book.title`]);
-            set_language(initRow[`book.language`]);
+        if(initRow[`video.id`]) {
+            set_title(initRow[`video.title`]);
+            set_language(initRow[`video.language`]);
         }
     }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let path = `/api/books`;
+        let path = `/api/videos`;
         if(action === APITools.Methods.PUT || action === APITools.Methods.DELETE) {
-            path += `/${initRow['book.id']}`;
+            path += `/${initRow['video.id']}`;
         }
 
         let formData = {
@@ -50,13 +46,8 @@ function BookForm({
             token: ACCOUNT.token,
         };
         if(action === APITools.Methods.POST || action === APITools.Methods.PUT) {
-            formData.category = category;
             formData.title = title;
             formData.language = language;
-
-            if (file) {
-                formData.epub = await APITools.fileInputToBase64(file);
-            }
         }
 
         const response = await APITools.send({
@@ -66,7 +57,7 @@ function BookForm({
         });
         if (response.apiStatus >= 200 && response.apiStatus < 300) {
 
-            // EventBus.dispatch(AppEvents.Books, {});
+            // EventBus.dispatch(AppEvents.Videos, {});
             onSaveDB();
 
         } else {
@@ -78,13 +69,12 @@ function BookForm({
     return (
         <>
             <h2>
-                {firtsLetterUppercase(t('book'))}
+                {firtsLetterUppercase(t('video'))}
             </h2>
             
             { (action === APITools.Methods.POST || action === APITools.Methods.PUT) &&
             <form onSubmit={handleSubmit}>
-                { category === BookEnums.Categories.NOVEL &&
-                <div className="ikMarginT20">
+                {/* <div className="ikMarginT20">
                     <div>
                         <label>
                             {firtsLetterUppercase(t('file'))}
@@ -100,8 +90,7 @@ function BookForm({
                         }}
                         className="ikW100"
                     />
-                </div>
-                }
+                </div> */}
 
                 <div className="ikMarginT20">
                     <div>
@@ -167,4 +156,4 @@ function BookForm({
         </>
     )
 }
-export default BookForm;
+export default VideoForm;
