@@ -1,5 +1,6 @@
 :root {
     --font1: "Gill Sans", sans-serif;
+    --bodyBgColour: #f6fbfd;
     --colour1: #1837F7;
     --colour2: #142cc5;
     --colour3: #FFC70B;
@@ -10,7 +11,7 @@
 }
 
 body {
-    background-color: #f6fbfd;
+    background-color: var(--bodyBgColour);
     color: slategrey;
     height: 100%;
     margin: 0;
@@ -277,6 +278,16 @@ h4 { font-size: 16px; margin-bottom: 10px; }
 .backDiv path {
     stroke: var(--colour1);
     fill: var(--colour1);
+}
+
+table tbody tr:nth-child(even) {
+    background-color: var(--bodyBgColour);
+}
+table tbody tr:nth-child(odd) {
+    background-color: #e6ebed;
+}
+table tbody tr:hover {
+    background-color: #d6dbfd;
 }
 
 /* #endregion MAIN */

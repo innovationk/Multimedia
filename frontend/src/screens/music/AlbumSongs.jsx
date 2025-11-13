@@ -87,7 +87,7 @@ function AlbumSongs({
                 <tbody>
                     { rows.map((row, iRow) => (
                         <tr key={iRow} >
-                            <td>
+                            <td className="ikPaddingH10 ikTextRight">
                                 {row[`song.track`]}
                             </td>
                             <td>
