@@ -47,7 +47,7 @@ function VideosScreen() {
         </h1>
 
         <div className="ikMarginT20">
-            {rows.map((row, index) => (
+            {/* {rows.map((row, index) => (
                 <div key={`row_${index}`} className="ikRow">
                     <div className="ikCol">
                         <NavLink to={`/videos/${row[`video.id`]}`}>
@@ -63,9 +63,40 @@ function VideosScreen() {
                             extension="mp4"
                             classNames="button1"
                         />
-                    </div> */}
+                    </div> /}
                 </div>
-            ))}
+            ))} */}
+
+            <div className="ikTableWrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th className="ikPaddingV10">
+                                {firtsLetterUppercase(t(`title`))}
+                            </th>
+                            <th>
+                                {firtsLetterUppercase(t(`language`))}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {rows.map((row, index) => (
+                            <tr key={`row_${index}`}>
+                                <td className="ikTextCenter ikPaddingV10">
+                                    <NavLink to={`/videos/${row[`video.id`]}`}>
+                                        {row[`video.title`]} 
+                                    </NavLink>
+                                </td>
+                                <td className="ikTextCenter">
+                                    { row[`video.language`] !== APITools.Languages.NONE &&
+                                        <>{row[`video.language`].toUpperCase()}</>
+                                    }
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </>
     );
