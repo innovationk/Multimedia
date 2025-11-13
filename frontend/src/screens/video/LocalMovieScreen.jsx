@@ -54,7 +54,7 @@ function LocalVideoScreen() {
         <h1 className="ikTextCenter">
             {row[`video.title`]} 
             { row[`video.language`] !== APITools.Languages.NONE &&
-                <>({row[`video.language`]})</>
+                <> ({(row[`video.language`] || "").toUpperCase()})</>
             }
         </h1>
 

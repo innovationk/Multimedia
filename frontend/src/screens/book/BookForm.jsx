@@ -26,12 +26,14 @@ function BookForm({
 
     const [category, set_category] = useState(BookEnums.Categories.NOVEL);
     const [title, set_title] = useState("");
+    const [language, set_language] = useState("");
     const [file, setFile] = useState(null);
 
     useEffect(() => {
         if(initRow[`book.id`]) {
             set_category(initRow[`book.category`]);
             set_title(initRow[`book.title`]);
+            set_language(initRow[`book.language`]);
         }
     }, []);
 
@@ -50,6 +52,7 @@ function BookForm({
         if(action === APITools.Methods.POST || action === APITools.Methods.PUT) {
             formData.category = category;
             formData.title = title;
+            formData.language = language;
 
             if (file) {
                 formData.epub = await APITools.fileInputToBase64(file);
@@ -84,11 +87,11 @@ function BookForm({
                 <div className="ikMarginT20">
                     <div>
                         <label>
-                            {firtsLetterUppercase(t('file'))} <Mandatory />
+                            {firtsLetterUppercase(t('file'))}
                         </label>
                     </div>
                     <input
-                        type="file" required
+                        type="file"
                         accept=".epub"
                         onChange={(e) => {
                             setFile(e.target.files[0]);
@@ -112,6 +115,30 @@ function BookForm({
                         placeholder={firtsLetterUppercase(t('title'))}
                         className="ikW100"
                     />
+                </div>
+
+                <div className="ikMarginT20">
+                    <div>
+                        <label>
+                            {firtsLetterUppercase(t('laguage'))} <Mandatory />
+                        </label>
+                    </div>
+                    <select required
+                        value={language}
+                        onChange={(e) => { 
+                            set_language(e.target.value || "");
+                        }}
+                        className="ikW100"
+                    >
+                        <option value={""}>{firtsLetterUppercase(t('choose_one'))}</option>
+                        {Object.values(APITools.Languages).map((lang, index) => (
+                            <option key={index}
+                                value={lang}
+                            >
+                                {lang.toLocaleUpperCase()}
+                            </option>
+                        ))}
+                    </select>
                 </div>
 
                 <div className="ikMarginT20">

@@ -61,7 +61,7 @@ function APIDownloadButton({
         <button onClick={handleDownload} disabled={isDownloading} className={`${classNames}`}>
             {isDownloading ? 'Downloading...' : <>
                 <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" 
-                    width="25px" height="25px" viewBox="0 0 52 52" enable-background="new 0 0 52 52" xml:space="preserve">
+                    width="25px" height="25px" viewBox="0 0 52 52">
                 <g>
                     <path d="M48.5,31h-3c-0.8,0-1.5,0.7-1.5,1.5v10c0,0.8-0.7,1.5-1.5,1.5h-33C8.7,44,8,43.3,8,42.5v-10
                         C8,31.7,7.3,31,6.5,31h-3C2.7,31,2,31.7,2,32.5V46c0,2.2,1.8,4,4,4h40c2.2,0,4-1.8,4-4V32.5C50,31.7,49.3,31,48.5,31z"/>
