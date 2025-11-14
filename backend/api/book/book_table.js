@@ -12,6 +12,7 @@ export default class BookTable extends MariadbTable {
 
         language: { dataType: MariadbEnums.DataTypes.ENUM, nullable: false, values: Object.values(MariadbEnums.LANGUAGES), default: `"${MariadbEnums.LANGUAGES.NONE}"`, index: true },
         title: { dataType: MariadbEnums.DataTypes.VARCHAR, length: 512, nullable: false },
+        description: { dataType: MariadbEnums.DataTypes.TEXT },
 
         updated: { dataType: MariadbEnums.DataTypes.UNIX_TIMESTAMP, nullable: false, default: `(UNIX_TIMESTAMP())`, onUpdate: `(UNIX_TIMESTAMP())` },
         created: { dataType: MariadbEnums.DataTypes.UNIX_TIMESTAMP, nullable: false, default: `(UNIX_TIMESTAMP())` },

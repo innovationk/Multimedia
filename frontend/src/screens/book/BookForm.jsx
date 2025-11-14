@@ -24,16 +24,19 @@ function BookForm({
 
     const ACCOUNT = LocalStorageTools.readData({ key: "account" });
 
-    const [category, set_category] = useState(BookEnums.Categories.NOVEL);
-    const [title, set_title] = useState("");
-    const [language, set_language] = useState("");
     const [file, setFile] = useState(null);
+    const [category, set_category] = useState(BookEnums.Categories.NOVEL);
+    const [language, set_language] = useState("");
+    const [title, set_title] = useState("");
+    const [description, set_description] = useState("");
+    
 
     useEffect(() => {
         if(initRow[`book.id`]) {
             set_category(initRow[`book.category`]);
-            set_title(initRow[`book.title`]);
             set_language(initRow[`book.language`]);
+            set_title(initRow[`book.title`]);
+            set_description(initRow[`book.description`]);
         }
     }, []);
 
@@ -51,8 +54,9 @@ function BookForm({
         };
         if(action === APITools.Methods.POST || action === APITools.Methods.PUT) {
             formData.category = category;
-            formData.title = title;
             formData.language = language;
+            formData.title = title;
+            formData.description = description;
 
             if (file) {
                 formData.epub = await APITools.fileInputToBase64(file);
@@ -106,20 +110,6 @@ function BookForm({
                 <div className="ikMarginT20">
                     <div>
                         <label>
-                            {firtsLetterUppercase(t('title'))} <Mandatory />
-                        </label>
-                    </div>
-                    <input type="text" required
-                        value={title}
-                        onChange={(e) => { set_title(e.target.value || ""); }}
-                        placeholder={firtsLetterUppercase(t('title'))}
-                        className="ikW100"
-                    />
-                </div>
-
-                <div className="ikMarginT20">
-                    <div>
-                        <label>
                             {firtsLetterUppercase(t('laguage'))} <Mandatory />
                         </label>
                     </div>
@@ -140,6 +130,38 @@ function BookForm({
                         ))}
                     </select>
                 </div>
+
+                <div className="ikMarginT20">
+                    <div>
+                        <label>
+                            {firtsLetterUppercase(t('title'))} <Mandatory />
+                        </label>
+                    </div>
+                    <input type="text" required
+                        value={title}
+                        onChange={(e) => { set_title(e.target.value || ""); }}
+                        placeholder={firtsLetterUppercase(t('title'))}
+                        className="ikW100"
+                    />
+                </div>
+
+                <div className="ikMarginT20">
+                    <div>
+                        <label>
+                            {firtsLetterUppercase(t('description'))} <Mandatory />
+                        </label>
+                    </div>
+                    <textarea value={description} 
+                        onChange={(e) => {
+                            set_description(e.target.value || "");
+                        }}
+                        placeholder={firtsLetterUppercase(t('description'))}
+                        rows={8}
+                        className="ikW100"
+                    ></textarea>
+                </div>
+
+                
 
                 <div className="ikMarginT20">
                     <button type='submit' className='button1 ikW100'>

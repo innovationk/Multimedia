@@ -121,11 +121,14 @@ function BooksScreen() {
             <table>
                 <thead>
                     <tr>
+                        <th>
+                            {firtsLetterUppercase(t(`language`))}
+                        </th>
                         <th className="ikPaddingV10">
                             {firtsLetterUppercase(t(`title`))}
                         </th>
-                        <th>
-                            {firtsLetterUppercase(t(`language`))}
+                        <th className="ikPaddingV10">
+                            {firtsLetterUppercase(t(`description`))}
                         </th>
                         <th>
                             {firtsLetterUppercase(t(`actions`))}
@@ -135,13 +138,16 @@ function BooksScreen() {
                 <tbody>
                     {rows.map((row, index) => (
                         <tr key={`row_${index}`}>
-                            <td className="ikTextCenter ikPaddingV10">
-                                {row[`book.title`]} 
-                            </td>
                             <td className="ikTextCenter">
                                 { row[`book.language`] !== APITools.Languages.NONE &&
                                     <> {(row[`book.language`] || "").toUpperCase()}</>
                                 }
+                            </td>
+                            <td className="ikTextCenter ikPaddingV10">
+                                {row[`book.title`]} 
+                            </td>
+                            <td className="ikTextCenter ikPaddingV10">
+                                <span style={{ whiteSpace: "pre-wrap" }}>{row[`book.description`]}</span>
                             </td>
                             <td className="ikTextCenter">
                                 <APIDownloadButton downloadUrl={`${APITools.getURL({})}/api/books/${row[`book.id`]}/download`}
